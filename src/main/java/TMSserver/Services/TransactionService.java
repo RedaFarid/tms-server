@@ -1,7 +1,7 @@
 package TMSserver.Services;
 
-import TMSserver.DAO.LogDAO;
-import TMSserver.Entities.LogDTO;
+import TMSserver.SQL.DAO.LogDAO;
+import TMSserver.SQL.Entities.LogDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class TransactionService {
 
     private final LogDAO logDAO;
-
 
     @Transactional
     public String addNewTransaction(LogDTO logDTO, String var, String var2){

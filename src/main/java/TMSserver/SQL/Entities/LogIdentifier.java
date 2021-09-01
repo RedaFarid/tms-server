@@ -1,4 +1,4 @@
-package TMSserver.Entities;
+package TMSserver.SQL.Entities;
 
 public enum LogIdentifier {
     

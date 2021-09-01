@@ -1,7 +1,7 @@
-package TMSserver.DAO;
+package TMSserver.SQL.DAO;
 
-import TMSserver.Entities.LogDTO;
-import TMSserver.Repositories.LogRepository;
+import TMSserver.SQL.Entities.LogDTO;
+import TMSserver.SQL.Repositories.LogRepository;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,11 +17,9 @@ public class LogDAO {
 
     private final LogRepository logRepository;
 
-
     @Cacheable("logs")
     public List<LogDTO> findAllLogs(){
         return Lists.newArrayList(logRepository.findAll());
     }
-
 
 }

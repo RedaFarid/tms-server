@@ -1,14 +1,17 @@
 package TMSserver.RestControllers;
 
 
-import TMSserver.Entities.LogDTO;
-import TMSserver.Repositories.LogRepository;
+import TMSserver.SQL.Entities.TankDTO;
+import TMSserver.SQL.Repositories.TankRepository;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -16,25 +19,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TanksController {
 
-    private final LogRepository logRepository;
-
+    private final TankRepository tankRepository;
 
     @GetMapping("/tank")
     public Tanks getTanks(){
-        return new Tanks(Lists.newArrayList(logRepository.findAll()));
+        return new Tanks(Lists.newArrayList(tankRepository.findAll()));
     }
 
     @PostMapping("/addTank")
-    public LogDTO addTank(@RequestBody LogDTO tank){
-        System.err.println(tank);
+    public TankDTO addTank(@RequestBody TankDTO tank){
         return tank;
     }
-
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Tanks{
-        private List<LogDTO> logs;
+        private List<TankDTO> tanks;
     }
 }

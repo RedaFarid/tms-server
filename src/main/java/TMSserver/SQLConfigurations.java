@@ -49,8 +49,8 @@ public class SQLConfigurations extends AbstractJdbcConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         dataSource.setUsername("sa");
-        dataSource.setPassword("Admin@123456");
-        dataSource.setUrl("jdbc:sqlserver://localhost:1434;databaseName=TASBase;");
+        dataSource.setPassword("123456");
+        dataSource.setUrl("jdbc:sqlserver://localhost:1434;databaseName=ArmyTMS;");
         return dataSource;
     }
 

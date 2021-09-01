@@ -1,4 +1,4 @@
-package TMSserver.Entities;
+package TMSserver.SQL.Entities;
 
 
 import lombok.AllArgsConstructor;

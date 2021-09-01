@@ -1,6 +1,6 @@
-package TMSserver.Repositories;
+package TMSserver.SQL.Repositories;
 
-import TMSserver.Entities.LogDTO;
+import TMSserver.SQL.Entities.LogDTO;
 import org.springframework.data.repository.CrudRepository;
 
 public interface LogRepository extends CrudRepository<LogDTO, Long> {
