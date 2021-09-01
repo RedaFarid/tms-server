@@ -1,6 +1,7 @@
 package TMSserver.RestControllers;
 
 
+import TMSserver.SQL.DAO.TankDAO;
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.SQL.Repositories.TankRepository;
 import com.google.common.collect.Lists;
@@ -21,9 +22,11 @@ public class TanksController {
 
     private final TankRepository tankRepository;
 
+    private final TankDAO tankDAO;
+
     @GetMapping("/tank")
     public Tanks getTanks(){
-        return new Tanks(Lists.newArrayList(tankRepository.findAll()));
+        return new Tanks(Lists.newArrayList(tankDAO.findAll()));
     }
 
     @PostMapping("/addTank")
