@@ -1,6 +1,7 @@
 package TMSserver.SQL.DatabaseManagement;
 
-import TMSserver.SQL.DAO.TankDAO;
+import TMSserver.DAO.MaterialDAO;
+import TMSserver.DAO.TankDAO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -22,11 +23,16 @@ public class Database {
     @Autowired
     private TankDAO tankDAO;
 
+    @Autowired
+    private MaterialDAO materialDAO;
+
     @PostConstruct
     public void createTables() {
 
         // create tables
         tankDAO.createTable();
+        materialDAO.createTable();
+
 
     }
 

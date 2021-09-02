@@ -1,6 +1,6 @@
 package TMSserver.Services;
 
-import TMSserver.SQL.DAO.LogDAO;
+import TMSserver.DAO.LogDAO;
 import TMSserver.SQL.Entities.LogDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

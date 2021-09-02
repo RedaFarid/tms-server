@@ -1,5 +1,6 @@
 package TMSserver;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -12,7 +13,32 @@ public class CachingConfigurations {
 
     @Bean
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("tanks");
+        return new ConcurrentMapCacheManager("tanks","materials");
     }
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

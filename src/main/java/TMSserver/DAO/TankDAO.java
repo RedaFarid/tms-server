@@ -1,4 +1,4 @@
-package TMSserver.SQL.DAO;
+package TMSserver.DAO;
 
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.SQL.Repositories.TankRepository;
@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 //Here you can cache data from database
 @Service
@@ -30,4 +30,15 @@ public class TankDAO {
     }
 
 
+    public Optional<TankDTO> findById(Long id) {
+        return tankRepository.findById(id);
+    }
+
+    public Optional<TankDTO> findByNameAndStation(Long id) {
+        return null;
+    }
+
+    public Optional<TankDTO> save(TankDTO tank) {
+        return Optional.of(tankRepository.save(tank));
+    }
 }

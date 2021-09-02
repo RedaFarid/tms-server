@@ -11,7 +11,7 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
             set @return = 'Table [Tanks] Already Exists'
             if not exists (select * from sysobjects where name='Tanks' and xtype='U')
             begin
-            CREATE TABLE [dbo].[Tanks](
+            CREATE TABLE Tanks(
             	[Name] [varchar](50) NOT NULL primary key,
             	[Capacity] [float] NULL,
             	[Level] [float] NULL,

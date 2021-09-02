@@ -1,4 +1,4 @@
-package TMSserver.SQL.DAO;
+package TMSserver.DAO;
 
 import TMSserver.SQL.Entities.LogDTO;
 import TMSserver.SQL.Repositories.LogRepository;

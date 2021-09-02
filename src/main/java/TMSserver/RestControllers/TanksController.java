@@ -1,9 +1,9 @@
 package TMSserver.RestControllers;
 
 
-import TMSserver.SQL.DAO.TankDAO;
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.SQL.Repositories.TankRepository;
+import TMSserver.Services.TanksService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,16 +22,16 @@ public class TanksController {
 
     private final TankRepository tankRepository;
 
-    private final TankDAO tankDAO;
+    private final TanksService tanksService;
 
     @GetMapping("/tank")
     public Tanks getTanks(){
-        return new Tanks(Lists.newArrayList(tankDAO.findAll()));
+        return new Tanks(Lists.newArrayList(tanksService.findAll()));
     }
 
     @PostMapping("/addTank")
     public TankDTO addTank(@RequestBody TankDTO tank){
-        return tank;
+        return tanksService.addNewTank(tank);
     }
 
     @Data
