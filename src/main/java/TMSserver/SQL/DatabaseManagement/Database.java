@@ -1,5 +1,6 @@
 package TMSserver.SQL.DatabaseManagement;
 
+import TMSserver.DAO.ClientsDAO;
 import TMSserver.DAO.DriverDAO;
 import TMSserver.DAO.MaterialDAO;
 import TMSserver.DAO.TankDAO;
@@ -20,17 +21,14 @@ public class Database {
     private DataSource dataSource;
     @Autowired
     private DriverManagerDataSource driverManagerDataSource;
-
-
     @Autowired
     private TankDAO tankDAO;
-
     @Autowired
     private MaterialDAO materialDAO;
-
-
     @Autowired
     private DriverDAO driverDAO;
+    @Autowired
+    private ClientsDAO clientsDAO;
     @PostConstruct
     public void createTables() {
 
@@ -38,6 +36,7 @@ public class Database {
         tankDAO.createTable();
         materialDAO.createTable();
         driverDAO.createTable();
+        clientsDAO.createTable();
 
 
     }
