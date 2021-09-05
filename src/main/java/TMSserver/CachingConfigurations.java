@@ -13,7 +13,7 @@ public class CachingConfigurations {
 
     @Bean
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("tanks","materials");
+        return new ConcurrentMapCacheManager("tanks","materials","drivers");
     }
 //
 
