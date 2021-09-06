@@ -24,8 +24,8 @@ public class Database {
     private MaterialDAO materialDAO;
     @Autowired
     private DriverDAO driverDAO;
-    @Autowired
-    private ClientsDAO clientsDAO;
+
+    private final ClientsDAO clientsDAO;
 
     private final TruckTrailersDAO truckTrailersDAO;
     @PostConstruct
