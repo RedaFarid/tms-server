@@ -36,22 +36,22 @@ public class TruckTrailersService {
 
 
     @Transactional
-    public TruckTrailerDTO addNewTruckTrailer(TruckTrailerDTO client) {
-        truckTrailersDAO.findById(client.getId()).ifPresentOrElse(clientDTO -> {
+    public TruckTrailerDTO addNewTruckTrailer(TruckTrailerDTO trailerDTO) {
+        truckTrailersDAO.findById(trailerDTO.getId()).ifPresentOrElse(clientDTO -> {
 
         }, () -> {
-            truckTrailersDAO.save(client);
+            truckTrailersDAO.save(trailerDTO);
         });
 
         return null;
     }
 
     @Transactional
-    public TruckTrailerDTO updateTrailerData(TruckTrailerDTO client) {
-        truckTrailersDAO.findById(client.getId()).map(clientDTO -> {
+    public TruckTrailerDTO updateTrailerData(TruckTrailerDTO trailerDTO) {
+        truckTrailersDAO.findById(trailerDTO.getId()).map(clientDTO -> {
             // Update Instructions
 
-            return truckTrailersDAO.save(client);
+            return truckTrailersDAO.save(trailerDTO);
         });
 
 

@@ -28,6 +28,9 @@ public class Database {
     private final ClientsDAO clientsDAO;
 
     private final TruckTrailersDAO truckTrailersDAO;
+
+    private final TruckContainersDAO truckContainersDAO;
+
     @PostConstruct
     public void createTables() {
 
@@ -37,6 +40,7 @@ public class Database {
         driverDAO.createTable();
         clientsDAO.createTable();
         truckTrailersDAO.createTable();
+        truckContainersDAO.createTable();
 
 
     }
