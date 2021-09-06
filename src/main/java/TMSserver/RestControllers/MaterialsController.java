@@ -1,14 +1,17 @@
 package TMSserver.RestControllers;
 
 
-import TMSserver.DAO.MaterialDAO;
 import TMSserver.SQL.Entities.MaterialDTO;
+import TMSserver.SQL.Entities.TruckContainerDTO;
+import TMSserver.Services.MaterialService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,11 +20,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MaterialsController {
 
-    private final MaterialDAO materialDAO;
+    private final MaterialService materialService;
 
     @GetMapping("/material")
     public Materials getMaterials(){
-        return new Materials(Lists.newArrayList(materialDAO.findAll()));
+        return new Materials(Lists.newArrayList(materialService.findAll()));
+    }
+
+    @PostMapping("/addMaterial")
+    public MaterialDTO addMaterial(@RequestBody MaterialDTO materialDTO){
+        return materialService.addNewMaterial(materialDTO);
     }
 
     @Data

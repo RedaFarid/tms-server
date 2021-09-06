@@ -17,7 +17,7 @@ public interface TruckContainerRepository extends PagingAndSortingRepository<Tru
             begin
             CREATE TABLE TruckContainers(
                 [id] int identity(1,1) primary key,
-               	[containerNumber] [nvarchar](50) UNIQUE,
+               	[containerNumber] [nvarchar](50) NOT NULL UNIQUE,
             	[licenceNumber] [varchar](50),
             	[licenceExpirationDate] date,
             	[maximumWeightConstrain] float,

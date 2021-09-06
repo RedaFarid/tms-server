@@ -14,7 +14,7 @@ public interface MaterialRepository extends PagingAndSortingRepository<MaterialD
             begin
             CREATE TABLE Materials(
                 [id] int identity(1,1) primary key, 
-            	[Name] [nvarchar](150) NOT NULL UNIQUE,
+            	[name] [nvarchar](150) NOT NULL UNIQUE,
             	[description] [nvarchar](max))
             end
             select @return;

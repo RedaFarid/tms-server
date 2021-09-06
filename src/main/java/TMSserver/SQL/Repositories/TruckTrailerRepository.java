@@ -14,7 +14,7 @@ public interface TruckTrailerRepository extends PagingAndSortingRepository<Truck
             begin
             CREATE TABLE TruckTrailers(
                 [id] int identity(1,1) primary key,
-               	[trailerNumber] [nvarchar](50) UNIQUE,
+               	[trailerNumber] [nvarchar](50) NOT NULL UNIQUE,
             	[licenceNumber] [varchar](50),
             	[licenceExpirationDate] date,
             	[permissions] [varchar](50),
