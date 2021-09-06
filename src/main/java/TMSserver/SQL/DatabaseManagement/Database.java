@@ -1,9 +1,6 @@
 package TMSserver.SQL.DatabaseManagement;
 
-import TMSserver.DAO.ClientsDAO;
-import TMSserver.DAO.DriverDAO;
-import TMSserver.DAO.MaterialDAO;
-import TMSserver.DAO.TankDAO;
+import TMSserver.DAO.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,8 @@ public class Database {
     private DriverDAO driverDAO;
     @Autowired
     private ClientsDAO clientsDAO;
+
+    private final TruckTrailersDAO truckTrailersDAO;
     @PostConstruct
     public void createTables() {
 
@@ -37,6 +36,7 @@ public class Database {
         materialDAO.createTable();
         driverDAO.createTable();
         clientsDAO.createTable();
+        truckTrailersDAO.createTable();
 
 
     }
