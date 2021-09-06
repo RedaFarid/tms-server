@@ -14,8 +14,12 @@ public interface MaterialRepository extends PagingAndSortingRepository<MaterialD
             begin
             CREATE TABLE Materials(
                 [id] int identity(1,1) primary key, 
-            	[name] [nvarchar](150) NOT NULL UNIQUE,
-            	[description] [nvarchar](max))
+            	[Name] [nvarchar](150) NOT NULL UNIQUE,
+            	[description] [nvarchar](max),
+            	[creationDate] datetime default GETDATE(),  
+                [modifyDate] datetime  default GETDATE(), 
+                [createdBy] varchar(100) ,
+                [onTerminal] varchar(100) )
             end
             select @return;
             """)

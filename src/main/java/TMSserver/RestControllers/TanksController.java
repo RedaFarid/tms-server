@@ -21,8 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TanksController {
 
-    private final TankRepository tankRepository;
-
     private final TanksService tanksService;
 
     @GetMapping("/tank")
