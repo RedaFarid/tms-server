@@ -4,13 +4,14 @@ import TMSserver.DAO.MaterialDAO;
 import TMSserver.SQL.Entities.MaterialDTO;
 import TMSserver.SQL.Entities.TruckContainerDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @RequiredArgsConstructor
-
+@Service
 public class MaterialService {
     private final MaterialDAO materialDAO;
 
