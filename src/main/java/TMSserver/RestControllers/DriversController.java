@@ -1,5 +1,6 @@
 package TMSserver.RestControllers;
 
+import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.DriverDTO;
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.SQL.Repositories.TankRepository;
@@ -34,6 +35,12 @@ public class DriversController {
     public DriverDTO addDriver(@RequestBody DriverDTO driver){
         return driversService.addNewDriver(driver);
     }
+
+
+
+    @PostMapping("/updateDriverData")
+    public DriverDTO updateDriver(@RequestBody DriverDTO driverDTO){return  driversService.updateDriverData(driverDTO);}
+
 
     @Data
     @AllArgsConstructor

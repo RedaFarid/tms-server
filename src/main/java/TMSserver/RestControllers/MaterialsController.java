@@ -1,6 +1,7 @@
 package TMSserver.RestControllers;
 
 
+import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.MaterialDTO;
 import TMSserver.SQL.Entities.TruckContainerDTO;
 import TMSserver.Services.MaterialService;
@@ -31,6 +32,12 @@ public class MaterialsController {
     public MaterialDTO addMaterial(@RequestBody MaterialDTO materialDTO){
         return materialService.addNewMaterial(materialDTO);
     }
+
+
+
+    @PostMapping("/updateMaterialData")
+    public MaterialDTO updateMaterial(@RequestBody MaterialDTO materialDTO){return  materialService.updateMaterialData(materialDTO);}
+
 
     @Data
     @AllArgsConstructor

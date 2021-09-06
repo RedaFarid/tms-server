@@ -1,5 +1,6 @@
 package TMSserver.RestControllers;
 
+import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.TruckContainerDTO;
 import TMSserver.SQL.Entities.TruckTrailerDTO;
 import TMSserver.Services.TruckContainersService;
@@ -29,6 +30,10 @@ public class TruckContainersController {
     public TruckContainerDTO addContainer(@RequestBody TruckContainerDTO truckContainerDTO){
         return truckContainersService.addNewTruckContainer(truckContainerDTO);
     }
+
+
+    @PostMapping("/updateContainerData")
+    public TruckContainerDTO updateContainer(@RequestBody TruckContainerDTO containerDTO){return  truckContainersService.updateContainerData(containerDTO);}
 
     @Data
     @AllArgsConstructor

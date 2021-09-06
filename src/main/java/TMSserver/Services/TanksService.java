@@ -44,7 +44,9 @@ public class TanksService {
             tankDTO.setCapacity(tank.getCapacity());
             // and so on
 
-            return tankDAO.save(tankDTO);
+//            return tankDAO.save(tankDTO);
+
+            return tankDAO.save(tank);
         }).map(this::calculateQtyOptional).get();
 
 

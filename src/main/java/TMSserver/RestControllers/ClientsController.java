@@ -35,6 +35,10 @@ public class ClientsController {
         return clientsService.addNewClient(client);
     }
 
+
+    @PostMapping("/updateClientData")
+    public ClientDTO updateClient(@RequestBody ClientDTO client){return  clientsService.updateClientData(client);}
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
