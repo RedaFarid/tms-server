@@ -15,7 +15,7 @@ public class TransactionService {
     @Transactional
     public String addNewTransaction(LogDTO logDTO, String var, String var2){
 
-        logDAO.findAllLogs();
+        logDAO.findAll();
 
         return "";
     }

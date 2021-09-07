@@ -20,7 +20,11 @@ public interface DriverRepository extends PagingAndSortingRepository<DriverDTO,L
             	[licenceExpirationDate] Date default getDate(),
             	[mobileNumber] [varchar](50),
             	[permissions] [varchar](50),
-            	[comment] [varchar](50));
+            	[comment] [varchar](50),
+            	[creationDate] datetime default GETDATE(),  
+                [modifyDate] datetime  default GETDATE(), 
+                [createdBy] varchar(100) ,
+                [onTerminal] varchar(100));
             end
             select @return;
             """)

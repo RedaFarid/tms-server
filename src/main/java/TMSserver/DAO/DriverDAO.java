@@ -6,6 +6,7 @@ import TMSserver.SQL.Repositories.DriverRepository;
 
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-//Here you can cache data from database
 @Service
 @RequiredArgsConstructor
 public class DriverDAO {
@@ -24,7 +24,6 @@ public class DriverDAO {
     public String createTable() {
         return driverRepository.createTable();
     }
-
 
     @Cacheable("drivers")
     public List<DriverDTO> findAll() {
@@ -40,7 +39,13 @@ public class DriverDAO {
         return driverRepository.findByLicenseNumber(licenseNumber);
     }
 
-    public Optional<DriverDTO> save(DriverDTO driver) {
-        return Optional.of(driverRepository.save(driver));
+    @CacheEvict(cacheNames= "drivers", allEntries = true)
+    public void deleteById(Long id) {
+        driverRepository.deleteById(id);
+    }
+
+    @CacheEvict(cacheNames= "drivers", allEntries = true)
+    public void save(DriverDTO driver) {
+       driverRepository.save(driver);
     }
 }

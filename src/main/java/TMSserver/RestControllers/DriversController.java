@@ -24,7 +24,6 @@ public class DriversController {
 
     private final DriversService driversService;
 
-
     @GetMapping("/driver")
     public DriversController.Drivers getDrivers(){
         return new DriversController.Drivers(Lists.newArrayList(driversService.findAll()));

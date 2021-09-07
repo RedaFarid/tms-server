@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-@RequiredArgsConstructor
+
 @Log4j2
 @Component
 public class Database {
@@ -24,12 +24,12 @@ public class Database {
     private MaterialDAO materialDAO;
     @Autowired
     private DriverDAO driverDAO;
-
-    private final ClientsDAO clientsDAO;
-
-    private final TruckTrailersDAO truckTrailersDAO;
-
-    private final TruckContainersDAO truckContainersDAO;
+    @Autowired
+    private ClientsDAO clientsDAO;
+    @Autowired
+    private TruckTrailersDAO truckTrailersDAO;
+    @Autowired
+    private TruckContainersDAO truckContainersDAO;
 
     @PostConstruct
     public void createTables() {

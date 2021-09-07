@@ -38,15 +38,5 @@ public class DriversService {
         return null;
     }
 
-    @Transactional
-    public DriverDTO updateDriverData(DriverDTO driver) {
-        driverDAO.findByLicenseNumber(driver.getLicenceNumber()).map(driverDTO -> {
-           // Update Instructions
 
-            return driverDAO.save(driver);
-        });
-
-
-        return null;
-    }
 }

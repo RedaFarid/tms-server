@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-//Here you can cache data from database
 @Service
 @RequiredArgsConstructor
 public class TankDAO {
