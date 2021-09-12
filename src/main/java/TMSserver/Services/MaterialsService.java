@@ -26,6 +26,10 @@ public class MaterialsService {
         return materialDAO.findByID(id);
     }
 
+    public Optional<MaterialDTO> findByName(String name) {
+        return materialDAO.findByName(name);
+    }
+
     public void deleteById(Long id) {
         materialDAO.deleteById(id);
     }

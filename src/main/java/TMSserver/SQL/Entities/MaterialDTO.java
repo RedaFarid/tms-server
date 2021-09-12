@@ -20,7 +20,7 @@ public class MaterialDTO {
 
     @Id
     private Long id;
-    private String Name ;
+    private String name;
     private String description;
 
     @CreatedDate
@@ -35,7 +35,7 @@ public class MaterialDTO {
     public String toString() {
         return "MaterialDTO{" +
                 "id=" + id +
-                ", Name='" + Name + '\'' +
+                ", Name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", creationDate=" + creationDate +
                 ", modifyDate=" + modifyDate +

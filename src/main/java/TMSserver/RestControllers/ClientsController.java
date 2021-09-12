@@ -1,7 +1,6 @@
 package TMSserver.RestControllers;
 
 import TMSserver.SQL.Entities.ClientDTO;
-import TMSserver.SQL.Entities.MaterialDTO;
 import TMSserver.Services.ClientsService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -33,6 +32,11 @@ public class ClientsController {
     @GetMapping("/clientById/{id}")
     public Optional<ClientDTO> getClientById(@PathVariable Long id){
         return clientsService.findById(id);
+    }
+
+    @GetMapping("/clientByName/{name}")
+    public Optional<ClientDTO> getClientByName(@PathVariable String name){
+        return clientsService.findByName(name);
     }
 
     @PostMapping("/deleteClientById")

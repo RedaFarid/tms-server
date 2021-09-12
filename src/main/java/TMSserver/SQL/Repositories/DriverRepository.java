@@ -31,7 +31,7 @@ public interface DriverRepository extends PagingAndSortingRepository<DriverDTO,L
     String createTable();
 
 
-    @Query("select * from drivers where LicenceNumber like :license")
+    @Query("select * from drivers where licenseNumber like :license")
     Optional<DriverDTO> findByLicenseNumber(String license);
 
 }

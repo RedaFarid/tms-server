@@ -31,6 +31,11 @@ public class MaterialsController {
         return materialsService.findByID(id);
     }
 
+    @GetMapping("/materialByName/{name}")
+    public Optional<MaterialDTO> getMaterialByName(@PathVariable String name){
+        return materialsService.findByName(name);
+    }
+
     @PostMapping("/deleteMaterialByID")
     public String  deleteMaterialById(@RequestBody Long id){
          materialsService.deleteById(id);

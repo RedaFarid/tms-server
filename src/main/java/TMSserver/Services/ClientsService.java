@@ -26,6 +26,10 @@ public class ClientsService {
         return clientsDAO.findById(id);
     }
 
+    public Optional<ClientDTO> findByName(String name) {
+        return clientsDAO.findByName(name);
+    }
+
     public void deleteById(Long id) {
         clientsDAO.deleteById(id);
     }

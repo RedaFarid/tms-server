@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,11 +24,11 @@ public class DriverDTO {
 
     @Id
     private Long id;
-    private String licenceNumber;
+    private String licenseNumber;
     private String name;
-    private Date licenceExpirationDate;
+    private LocalDate licenceExpirationDate;
     private String mobileNumber;
-    private String permissions;
+    private Permissions permissions;
     private String comment;
     @CreatedDate
     private LocalDateTime creationDate;
@@ -41,7 +42,7 @@ public class DriverDTO {
     public String toString() {
         return "DriverDTO{" +
                 "id=" + id +
-                ", licenceNumber='" + licenceNumber + '\'' +
+                ", licenceNumber='" + licenseNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", licenceExpirationDate=" + licenceExpirationDate +
                 ", mobileNumber='" + mobileNumber + '\'' +

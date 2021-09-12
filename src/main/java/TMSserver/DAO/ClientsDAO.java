@@ -36,6 +36,10 @@ public class ClientsDAO {
         return clientRepository.findById(id);
     }
 
+    public Optional<ClientDTO> findByName(String name) {
+        return clientRepository.findByName(name);
+    }
+
     @CacheEvict(cacheNames = "clients", allEntries = true)
     public void deleteById(Long id) {
         clientRepository.deleteById(id);
