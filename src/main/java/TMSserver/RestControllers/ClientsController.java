@@ -45,6 +45,10 @@ public class ClientsController {
         return "deleted";
     }
 
+
+    @PostMapping("/updateClientData")
+    public ClientDTO updateClient(@RequestBody ClientDTO client){return  clientsService.updateClientData(client);}
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

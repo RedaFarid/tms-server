@@ -1,6 +1,7 @@
 package TMSserver.RestControllers;
 
 
+import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.Services.TanksService;
 import com.google.common.collect.Lists;
@@ -30,6 +31,10 @@ public class TanksController {
     public TankDTO addTank(@RequestBody TankDTO tank){
         return tanksService.addNewTank(tank);
     }
+
+
+    @PostMapping("/updateTankData")
+    public TankDTO updateTank(@RequestBody TankDTO tankDTO){return  tanksService.updateTankData(tankDTO);}
 
     @Data
     @AllArgsConstructor
