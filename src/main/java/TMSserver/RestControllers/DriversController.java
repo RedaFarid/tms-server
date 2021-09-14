@@ -24,7 +24,7 @@ public class DriversController {
     private final DriversService driversService;
 
     @GetMapping("/drivers")
-    public Drivers getClients(){
+    public Drivers getDrivers(){
         return new Drivers(Lists.newArrayList(driversService.findAll()));
 
     }
@@ -36,7 +36,7 @@ public class DriversController {
     }
 
     @GetMapping("/driverById/{id}")
-    public Optional<DriverDTO> getClientById(@PathVariable Long id){
+    public Optional<DriverDTO> getDriverById(@PathVariable Long id){
         return driversService.findById(id);
     }
 
@@ -46,7 +46,7 @@ public class DriversController {
         return "deleted";
     }
     @GetMapping("/driverByLicenceId/{licenceId}")
-    public Optional<DriverDTO> getClientById(@PathVariable String licenceId){
+    public Optional<DriverDTO> getDriverByLicenceId(@PathVariable String licenceId){
         return driversService.findByLicenceId(licenceId);
     }
 

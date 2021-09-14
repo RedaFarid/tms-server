@@ -42,9 +42,18 @@ public class TruckContainersDAO {
         return truckContainerRepository.findByContainer(container);
     }
 
-    @CacheEvict(cacheNames= "truckContainers", allEntries = true)
-    public Optional<TruckContainerDTO> save(TruckContainerDTO truckContainer) {
-        return Optional.of(truckContainerRepository.save(truckContainer));
+
+    @CacheEvict(cacheNames = "truckContainers", allEntries = true)
+    public void deleteById(Long id) {
+        truckContainerRepository.deleteById(id);
     }
+
+
+    @CacheEvict(cacheNames= "truckContainers", allEntries = true)
+    public void save(TruckContainerDTO truckContainer) {
+        truckContainerRepository.save(truckContainer);
+    }
+
+
 
 }

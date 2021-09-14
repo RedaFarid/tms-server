@@ -21,16 +21,18 @@ public interface TruckContainerRepository extends PagingAndSortingRepository<Tru
             	[licenceNumber] [varchar](50),
             	[licenceExpirationDate] date,
             	[maximumWeightConstrain] float,
-            	[compartmentsNumber] int,
-            	[calibrationExpirationDate] date,
             	[permissions] [varchar](50),
-            	[comment] [varchar](500));
+            	[comment] [varchar](500),
+            	[creationDate] datetime default GETDATE(),  
+                [modifyDate] datetime  default GETDATE(), 
+                [createdBy] varchar(100) ,
+                [onTerminal] varchar(100));
             end
             select @return;
             """)
     String createTable();
 
-    @Query("select * from TruckContainers where licenseNumber like :license ")
+    @Query("select * from TruckContainers where licenceNumber like :license ")
     Optional<TruckContainerDTO> findByLicense(String license);
 
     @Query("select * from TruckContainers where ContainerNumber like :number ")

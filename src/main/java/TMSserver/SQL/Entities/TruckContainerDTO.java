@@ -5,10 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -20,33 +25,18 @@ public class TruckContainerDTO {
     @Id
     private Long id;
     private String containerNumber;
-    private String licenseNumber;
-    private Date licenseExpirationDate;
+    private String licenceNumber;
+    private LocalDate licenceExpirationDate;
     private double maximumWeightConstrain;
-    private int compartmentsNumber;
-    private Date calibrationExpirationDate;
-    private String permissions;
+    private Permissions permissions;
     private String comment;
+    @CreatedDate
+    private LocalDateTime creationDate;
+    @LastModifiedDate
+    private LocalDateTime modifyDate;
+    @CreatedBy
+    private String createdBy;
+    private String onTerminal;
 
-    public TruckContainerDTO(String containerNumber, String licenseNumber, Date licenseExpirationDate, double maximumWeightConstrain, int compartmentsNumber, Date calibrationExpirationDate, String permissions, String comment) {
-        this.containerNumber = containerNumber;
-        this.licenseNumber = licenseNumber;
-        this.licenseExpirationDate = licenseExpirationDate;
-        this.maximumWeightConstrain = maximumWeightConstrain;
-        this.compartmentsNumber = compartmentsNumber;
-        this.calibrationExpirationDate = calibrationExpirationDate;
-        this.permissions = permissions;
-        this.comment = comment;
-    }
-
-    public TruckContainerDTO(String licenseNumber, Date licenseExpirationDate, double maximumWeightConstrain, int compartmentsNumber, Date calibrationExpirationDate, String permissions, String comment) {
-        this.licenseNumber = licenseNumber;
-        this.licenseExpirationDate = licenseExpirationDate;
-        this.maximumWeightConstrain = maximumWeightConstrain;
-        this.compartmentsNumber = compartmentsNumber;
-        this.calibrationExpirationDate = calibrationExpirationDate;
-        this.permissions = permissions;
-        this.comment = comment;
-    }
     
 }

@@ -1,39 +1,60 @@
 package TMSserver.RestControllers;
 
-import TMSserver.SQL.Entities.ClientDTO;
+import TMSserver.SQL.Entities.DriverDTO;
 import TMSserver.SQL.Entities.TruckContainerDTO;
-import TMSserver.SQL.Entities.TruckTrailerDTO;
 import TMSserver.Services.TruckContainersService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 public class TruckContainersController {
     private final TruckContainersService truckContainersService;
 
-    @GetMapping("/truckContainer")
-    public TruckContainersController.TruckContainers getTruckTrailers(){
-        return new TruckContainersController.TruckContainers(Lists.newArrayList(truckContainersService.findAll()));
+    @GetMapping("/truckContainers")
+    public TruckContainers getTruckContainers(){
+        return new TruckContainers(Lists.newArrayList(truckContainersService.findAll()));
+
     }
 
-    @PostMapping("/addContainer")
-    public TruckContainerDTO addContainer(@RequestBody TruckContainerDTO truckContainerDTO){
-        return truckContainersService.addNewTruckContainer(truckContainerDTO);
+    @PostMapping("/saveTruckContainers")
+    public String  save(@RequestBody TruckContainerDTO truckContainerDTO){
+        String msg = "saved";
+        try {
+            truckContainersService.save(truckContainerDTO);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
+    @GetMapping("/truckContainersById/{id}")
+    public Optional<TruckContainerDTO> getTruckContainerById(@PathVariable Long id){
+        return truckContainersService.findById(id);
+    }
 
-    @PostMapping("/updateContainerData")
-    public TruckContainerDTO updateContainer(@RequestBody TruckContainerDTO containerDTO){return  truckContainersService.updateContainerData(containerDTO);}
+    @PostMapping("/deleteTruckContainerById")
+    public String deleteTruckContainersById(@RequestBody Long id){
+        truckContainersService.deleteById(id);
+        return "deleted";
+    }
+    @GetMapping("/truckContainersByLicenceNo/{licenceId}")
+    public Optional<TruckContainerDTO> getClientByLicenceId(@PathVariable String licenceId){
+        return truckContainersService.findByLicence(licenceId);
+    }
+
+    @GetMapping("/truckContainersByContainerNo/{containerNo}")
+    public Optional<TruckContainerDTO> getTruckContainersByContainerNo(@PathVariable String containerNo){
+        return truckContainersService.findByContainer(containerNo);
+    }
 
     @Data
     @AllArgsConstructor

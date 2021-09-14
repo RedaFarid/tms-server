@@ -1,6 +1,7 @@
 package TMSserver.Services;
 
 import TMSserver.DAO.TruckContainersDAO;
+import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.TruckContainerDTO;
 import TMSserver.SQL.Entities.TruckTrailerDTO;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,39 +23,25 @@ public class TruckContainersService {
         return new ArrayList<>(truckContainersDAO.findAll());
     }
 
-    public List<TruckContainerDTO> findById(Long id) {
-        return truckContainersDAO.findById(id).stream().collect(Collectors.toList());
+    public Optional<TruckContainerDTO> findById(Long id) {
+        return truckContainersDAO.findById(id);
     }
 
-    public List<TruckContainerDTO> findByContainer(String id) {
-        return truckContainersDAO.findByContainer(id).stream().collect(Collectors.toList());
-    }
-    public List<TruckContainerDTO> findByLicense(String id) {
-        return truckContainersDAO.findByLicense(id).stream().collect(Collectors.toList());
+    public Optional<TruckContainerDTO> findByContainer(String name) {
+        return truckContainersDAO.findByContainer(name);
     }
 
-
-    @Transactional
-    public TruckContainerDTO addNewTruckContainer(TruckContainerDTO containerDTO) {
-        truckContainersDAO.findById(containerDTO.getId()).ifPresentOrElse(clientDTO -> {
-
-        }, () -> {
-            truckContainersDAO.save(containerDTO);
-        });
-
-        return null;
+    public Optional<TruckContainerDTO> findByLicence(String name) {
+        return truckContainersDAO.findByLicense(name);
     }
 
-    @Transactional
-    public TruckContainerDTO updateContainerData(TruckContainerDTO containerDTO) {
-        truckContainersDAO.findById(containerDTO.getId()).map(clientDTO -> {
-            // Update Instructions
-
-            return truckContainersDAO.save(containerDTO);
-        });
-
-
-        return null;
+    public void deleteById(Long id) {
+        truckContainersDAO.deleteById(id);
     }
+
+    public void save(TruckContainerDTO truckContainerDTO) {
+        truckContainersDAO.save(truckContainerDTO);
+    }
+
 
 }
