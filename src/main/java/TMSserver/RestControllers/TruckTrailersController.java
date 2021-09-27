@@ -63,9 +63,9 @@ public class TruckTrailersController {
         return truckTrailersService.findByLicence(licenceId);
     }
 
-    @GetMapping("/truckContainersByTrailerNo/{trailerNo}")
-    public Optional<TruckTrailerDTO> getTruckTrailersByContainerNo(@PathVariable String trailerNo) {
-        return truckTrailersService.findByContainer(trailerNo);
+    @GetMapping("/truckTrailersByTrailerNo/{trailerNo}")
+    public Optional<TruckTrailerDTO> getTruckTrailersByTrailerNo(@PathVariable String trailerNo) {
+        return truckTrailersService.findByTrailer(trailerNo);
     }
 
     @Data

@@ -22,7 +22,7 @@ public class TruckTrailersService {
         return truckTrailersDAO.findById(id);
     }
 
-    public Optional<TruckTrailerDTO> findByContainer(String name) {
+    public Optional<TruckTrailerDTO> findByTrailer(String name) {
         return truckTrailersDAO.findByTrailer(name);
     }
 

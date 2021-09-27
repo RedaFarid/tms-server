@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,9 +25,9 @@ public class TruckTrailerDTO {
     @Id
     private Long id;
     private String trailerNumber;
-    private String licenseNumber;
-    private Date licenseExpirationDate;
-    private String permissions;
+    private String licenceNumber;
+    private LocalDate licenceExpirationDate;
+    private Permissions permissions;
     private String comment;
     @CreatedDate
     private LocalDateTime creationDate;

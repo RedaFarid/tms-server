@@ -33,7 +33,6 @@ public class Database {
 
     @PostConstruct
     public void createTables() {
-
         // create tables
         tankDAO.createTable();
         materialDAO.createTable();
