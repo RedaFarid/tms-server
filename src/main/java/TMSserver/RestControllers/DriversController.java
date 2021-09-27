@@ -1,11 +1,7 @@
 package TMSserver.RestControllers;
 
-import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.DriverDTO;
-import TMSserver.SQL.Entities.TankDTO;
-import TMSserver.SQL.Repositories.TankRepository;
 import TMSserver.Services.DriversService;
-import TMSserver.Services.TanksService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,14 +21,26 @@ public class DriversController {
 
     @GetMapping("/drivers")
     public Drivers getDrivers(){
-        return new Drivers(Lists.newArrayList(driversService.findAll()));
+        Drivers drivers;
+        try {
+            drivers = new Drivers(Lists.newArrayList(driversService.findAll()), null);
+        } catch (Exception e) {
+            drivers = new Drivers(null, e);
+        }
+        return drivers;
 
     }
 
     @PostMapping("/saveDriver")
     public String  save(@RequestBody DriverDTO driverDTO){
-        driversService.save(driverDTO);
-        return "saved";
+        String msg = "saved";
+        try {
+            driversService.save(driverDTO);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
     @GetMapping("/driverById/{id}")
@@ -42,19 +50,26 @@ public class DriversController {
 
     @PostMapping("/deleteDriverById")
     public String deleteClientById(@RequestBody Long id){
-        driversService.deleteById(id);
-        return "deleted";
+        String msg = "deleted";
+        try {
+            driversService.deleteById(id);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
+
     @GetMapping("/driverByLicenceId/{licenceId}")
     public Optional<DriverDTO> getDriverByLicenceId(@PathVariable String licenceId){
         return driversService.findByLicenceId(licenceId);
     }
-
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Drivers{
         private List<DriverDTO> drivers;
+        private Exception exception;
     }
 }

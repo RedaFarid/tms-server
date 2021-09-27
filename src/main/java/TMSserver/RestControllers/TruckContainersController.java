@@ -26,7 +26,6 @@ public class TruckContainersController {
             truckContainers = new TruckContainers(null, e);
         }
         return truckContainers;
-
     }
 
     @PostMapping("/saveTruckContainers")
