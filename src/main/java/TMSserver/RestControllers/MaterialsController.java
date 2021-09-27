@@ -1,9 +1,7 @@
 package TMSserver.RestControllers;
 
 
-import TMSserver.DAO.MaterialDAO;
 import TMSserver.SQL.Entities.MaterialDTO;
-import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.Services.MaterialsService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -23,7 +21,13 @@ public class MaterialsController {
 
     @GetMapping("/material")
     public Materials getMaterials(){
-        return new Materials(Lists.newArrayList(materialsService.findAll()));
+        Materials materials;
+        try {
+            materials = new Materials(Lists.newArrayList(materialsService.findAll()),null);
+        } catch (Exception e) {
+            materials = new Materials(null, e);
+        }
+        return materials;
     }
 
     @GetMapping("/materialByID/{id}")
@@ -38,14 +42,27 @@ public class MaterialsController {
 
     @PostMapping("/deleteMaterialByID")
     public String  deleteMaterialById(@RequestBody Long id){
-         materialsService.deleteById(id);
-         return "deleted";
+        String msg = "deleted";
+        try {
+            materialsService.deleteById(id);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
     @PostMapping("/saveMaterial")
     public String save(@RequestBody MaterialDTO materialDTO){
-        materialsService.save(materialDTO);
-        return "saved";
+
+        String msg = "saved";
+        try {
+            materialsService.save(materialDTO);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
 
@@ -54,5 +71,6 @@ public class MaterialsController {
     @NoArgsConstructor
     public static class Materials{
         private List<MaterialDTO> materials;
+        private Exception exception;
     }
 }
