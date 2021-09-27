@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class TruckContainersService {
     private final TruckContainersDAO truckContainersDAO;
 
-
     public List<TruckContainerDTO> findAll() {
         return new ArrayList<>(truckContainersDAO.findAll());
     }
@@ -26,7 +25,6 @@ public class TruckContainersService {
     public Optional<TruckContainerDTO> findById(Long id) {
         return truckContainersDAO.findById(id);
     }
-
     public Optional<TruckContainerDTO> findByContainer(String name) {
         return truckContainersDAO.findByContainer(name);
     }

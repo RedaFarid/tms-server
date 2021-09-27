@@ -18,13 +18,17 @@ public interface TruckTrailerRepository extends PagingAndSortingRepository<Truck
             	[licenceNumber] [varchar](50),
             	[licenceExpirationDate] date,
             	[permissions] [varchar](50),
-            	[comment] [varchar](500));
+            	[comment] [varchar](500),
+            	[creationDate] datetime default GETDATE(),  
+                [modifyDate] datetime  default GETDATE(), 
+                [createdBy] varchar(100) ,
+                [onTerminal] varchar(100));
             end
             select @return;
             """)
     String createTable();
 
-    @Query("select * from TruckTrailers where licenseNumber like :license ")
+    @Query("select * from TruckTrailers where licenceNumber like :license ")
     Optional<TruckTrailerDTO> findByLicense(String license);
 
     @Query("select * from TruckTrailers where trailerNumber like :trailer ")

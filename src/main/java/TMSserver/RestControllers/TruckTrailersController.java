@@ -1,24 +1,16 @@
 package TMSserver.RestControllers;
 
-import TMSserver.SQL.Entities.ClientDTO;
-import TMSserver.SQL.Entities.DriverDTO;
-import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.SQL.Entities.TruckTrailerDTO;
-import TMSserver.SQL.Repositories.TankRepository;
-import TMSserver.Services.DriversService;
-import TMSserver.Services.TanksService;
 import TMSserver.Services.TruckTrailersService;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,24 +19,54 @@ public class TruckTrailersController {
 
     private final TruckTrailersService truckTrailersService;
 
-    @GetMapping("/truckTrailer")
-    public TruckTrailersController.TruckTrailers getTruckTrailers(){
-        return new TruckTrailersController.TruckTrailers(Lists.newArrayList(truckTrailersService.findAll()));
+    @GetMapping("/truckTrailers")
+    public TruckTrailers getTruckTrailers() {
+        TruckTrailers truckTrailers;
+        try {
+            truckTrailers = new TruckTrailers(Lists.newArrayList(truckTrailersService.findAll()), null);
+        } catch (Exception e) {
+            truckTrailers = new TruckTrailers(null, e);
+        }
+        return truckTrailers;
     }
 
-    @PostMapping("/addTrailer")
-    public TruckTrailerDTO addTrailer(@RequestBody TruckTrailerDTO truckTrailerDTO){
-        return truckTrailersService.addNewTruckTrailer(truckTrailerDTO);
+    @PostMapping("/saveTruckTrailers")
+    public String save(@RequestBody TruckTrailerDTO truckTrailerDTO) {
+        String msg = "saved";
+        try {
+            truckTrailersService.save(truckTrailerDTO);
+        } catch (Exception e) {
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
+    @GetMapping("/truckTrailerById/{id}")
+    public Optional<TruckTrailerDTO> getTruckTrailersById(@PathVariable Long id) {
+        return truckTrailersService.findById(id);
+    }
 
-    @PostMapping("/updateTrailerData")
-    public TruckTrailerDTO updateTrailer(@RequestBody TruckTrailerDTO trailerDTO){return  truckTrailersService.updateTrailerData(trailerDTO);}
+    @PostMapping("/deleteTruckTrailerById")
+    public String deleteTruckTrailersById(@RequestBody Long id) {
+        truckTrailersService.deleteById(id);
+        return "deleted";
+    }
+
+    @GetMapping("/truckTrailersByLicenceNo/{licenceId}")
+    public Optional<TruckTrailerDTO> getTrailerByLicenceId(@PathVariable String licenceId) {
+        return truckTrailersService.findByLicence(licenceId);
+    }
+
+    @GetMapping("/truckContainersByTrailerNo/{trailerNo}")
+    public Optional<TruckTrailerDTO> getTruckTrailersByContainerNo(@PathVariable String trailerNo) {
+        return truckTrailersService.findByContainer(trailerNo);
+    }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class TruckTrailers{
+    public static class TruckTrailers {
         private List<TruckTrailerDTO> truckTrailers;
+        private Exception exception;
     }
 }

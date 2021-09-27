@@ -36,17 +36,19 @@ public class TruckTrailersDAO {
         return truckTrailerRepository.findByLicense(licenseNumber);
     }
 
-    public Optional<TruckTrailerDTO> findByTrailer(String trailerNumber) {
-        return truckTrailerRepository.findByTrailer(trailerNumber);
+    public Optional<TruckTrailerDTO> findByTrailer(String trailer) {
+        return truckTrailerRepository.findByTrailer(trailer);
     }
 
-    @CacheEvict(cacheNames= "truckTrailers", allEntries = true)
+    @CacheEvict(cacheNames = "truckTrailers", allEntries = true)
     public void deleteById(Long id) {
         truckTrailerRepository.deleteById(id);
     }
 
     @CacheEvict(cacheNames= "truckTrailers", allEntries = true)
-    public Optional<TruckTrailerDTO> save(TruckTrailerDTO truckTrailerDTO) {
-        return Optional.of(truckTrailerRepository.save(truckTrailerDTO));
+    public void save(TruckTrailerDTO truckTrailerDTO) {
+        truckTrailerRepository.save(truckTrailerDTO);
     }
+
+
 }

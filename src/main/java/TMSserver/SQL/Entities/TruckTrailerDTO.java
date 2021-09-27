@@ -5,10 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -24,20 +28,12 @@ public class TruckTrailerDTO {
     private Date licenseExpirationDate;
     private String permissions;
     private String comment;
-
-    public TruckTrailerDTO(String trailerNumber, String licenseNumber, Date licenseExpirationDate, String permissions, String comment) {
-        this.trailerNumber = trailerNumber;
-        this.licenseNumber = licenseNumber;
-        this.licenseExpirationDate = licenseExpirationDate;
-        this.permissions = permissions;
-        this.comment = comment;
-    }
-
-    public TruckTrailerDTO(String LicenseNumber, Date LicenseExpirationDate, String Permissions, String Comment) {
-        this.licenseNumber = LicenseNumber;
-        this.licenseExpirationDate = LicenseExpirationDate;
-        this.permissions = Permissions;
-        this.comment = Comment;
-    }
+    @CreatedDate
+    private LocalDateTime creationDate;
+    @LastModifiedDate
+    private LocalDateTime modifyDate;
+    @CreatedBy
+    private String createdBy;
+    private String onTerminal;
     
 }

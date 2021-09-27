@@ -1,6 +1,5 @@
 package TMSserver.RestControllers;
 
-import TMSserver.SQL.Entities.DriverDTO;
 import TMSserver.SQL.Entities.TruckContainerDTO;
 import TMSserver.Services.TruckContainersService;
 import com.google.common.collect.Lists;
@@ -20,7 +19,13 @@ public class TruckContainersController {
 
     @GetMapping("/truckContainers")
     public TruckContainers getTruckContainers(){
-        return new TruckContainers(Lists.newArrayList(truckContainersService.findAll()));
+        TruckContainers truckContainers;
+        try {
+            truckContainers = new TruckContainers(Lists.newArrayList(truckContainersService.findAll()), null);
+        } catch (Exception e) {
+            truckContainers = new TruckContainers(null, e);
+        }
+        return truckContainers;
 
     }
 
@@ -43,11 +48,17 @@ public class TruckContainersController {
 
     @PostMapping("/deleteTruckContainerById")
     public String deleteTruckContainersById(@RequestBody Long id){
+        String msg = "deleted";
+        try {
         truckContainersService.deleteById(id);
-        return "deleted";
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
     @GetMapping("/truckContainersByLicenceNo/{licenceId}")
-    public Optional<TruckContainerDTO> getClientByLicenceId(@PathVariable String licenceId){
+    public Optional<TruckContainerDTO> getTruckContainerByLicenceId(@PathVariable String licenceId){
         return truckContainersService.findByLicence(licenceId);
     }
 
@@ -61,5 +72,6 @@ public class TruckContainersController {
     @NoArgsConstructor
     public static class TruckContainers{
         private List<TruckContainerDTO> truckContainer;
+        private Exception exception;
     }
 }
