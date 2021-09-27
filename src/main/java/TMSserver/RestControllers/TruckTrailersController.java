@@ -48,8 +48,14 @@ public class TruckTrailersController {
 
     @PostMapping("/deleteTruckTrailerById")
     public String deleteTruckTrailersById(@RequestBody Long id) {
-        truckTrailersService.deleteById(id);
-        return "deleted";
+        String msg = "deleted";
+        try {
+            truckTrailersService.deleteById(id);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
     @GetMapping("/truckTrailersByLicenceNo/{licenceId}")

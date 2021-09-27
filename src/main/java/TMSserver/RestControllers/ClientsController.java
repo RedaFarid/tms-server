@@ -2,7 +2,6 @@ package TMSserver.RestControllers;
 
 import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.Services.ClientsService;
-import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class ClientsController {
+
     private final ClientsService clientsService;
 
     @GetMapping("/clients")
