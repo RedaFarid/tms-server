@@ -28,10 +28,10 @@ public interface TruckTrailerRepository extends PagingAndSortingRepository<Truck
             """)
     String createTable();
 
-    @Query("select * from TruckTrailers where licenceNumber like :license ")
+    @Query("select top 1 *  from TruckTrailers where licenceNumber like :license ")
     Optional<TruckTrailerDTO> findByLicense(String license);
 
-    @Query("select * from TruckTrailers where trailerNumber like :trailer ")
+    @Query("select top 1 *  from TruckTrailers where trailerNumber like :trailer ")
     Optional<TruckTrailerDTO> findByTrailer(String trailer);
 
 }

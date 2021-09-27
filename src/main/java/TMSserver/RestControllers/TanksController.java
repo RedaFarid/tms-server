@@ -1,20 +1,15 @@
 package TMSserver.RestControllers;
 
-
-import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.Services.TanksService;
-import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,24 +17,75 @@ public class TanksController {
 
     private final TanksService tanksService;
 
-    @GetMapping("/tank")
-    public Tanks getTanks(){
-        return new Tanks(Lists.newArrayList(tanksService.findAll()));
+    @GetMapping("/tanks")
+    public Tanks getTanks() {
+        Tanks tanks;
+        try {
+            tanks = new Tanks(tanksService.findAll(), null);
+        } catch (Exception e) {
+            tanks = new Tanks(null, e);
+        }
+        return tanks;
     }
 
-    @PostMapping("/addTank")
-    public TankDTO addTank(@RequestBody TankDTO tank){
-        return tanksService.addNewTank(tank);
+    @PostMapping("/saveTank")
+    public String save(@RequestBody TankDTO tank) {
+        String msg = "saved";
+        try {
+            tanksService.save(tank);
+        } catch (Exception e) {
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
+    @GetMapping("/tankById/{id}")
+    public Optional<TankDTO> getTankById(@PathVariable Long id) {
+        return tanksService.findById(id);
+    }
 
-    @PostMapping("/updateTankData")
-    public TankDTO updateTank(@RequestBody TankDTO tankDTO){return  tanksService.updateTankData(tankDTO);}
+    @GetMapping("/tankByNameAndStation/{name}/{station}")
+    public Optional<TankDTO> getTankByName(@PathVariable String name, @PathVariable String station) {
+        return tanksService.findByName(name, station);
+    }
+
+    @PostMapping("/deleteTankById")
+    public String deleteTankById(@RequestBody Long id) {
+        String msg = "deleted";
+        try {
+            tanksService.deleteById(id);
+        } catch (Exception e) {
+            msg = e.getMessage();
+        }
+        return msg;
+    }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Tanks{
-        private List<TankDTO> tanks;
+    public static class Tanks {
+        private List<TankDTO> tank;
+        private Exception exception;
     }
+//
+//    @GetMapping("/tank")
+//    public Tanks getTanks(){
+//        return new Tanks(Lists.newArrayList(tanksService.findAll()));
+//    }
+//
+//    @PostMapping("/addTank")
+//    public TankDTO addTank(@RequestBody TankDTO tank){
+//        return tanksService.addNewTank(tank);
+//    }
+//
+//
+//    @PostMapping("/updateTankData")
+//    public TankDTO updateTank(@RequestBody TankDTO tankDTO){return  tanksService.updateTankData(tankDTO);}
+//
+//    @Data
+//    @AllArgsConstructor
+//    @NoArgsConstructor
+//    public static class Tanks{
+//        private List<TankDTO> tanks;
+//    }
 }

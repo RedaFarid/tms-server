@@ -32,9 +32,9 @@ public interface TruckContainerRepository extends PagingAndSortingRepository<Tru
             """)
     String createTable();
 
-    @Query("select * from TruckContainers where licenceNumber like :license ")
+    @Query("select top 1 *   from TruckContainers where licenceNumber like :license ")
     Optional<TruckContainerDTO> findByLicense(String license);
 
-    @Query("select * from TruckContainers where ContainerNumber like :number ")
+    @Query("select top 1 * from TruckContainers where ContainerNumber like :number ")
     Optional<TruckContainerDTO> findByContainer(String number);
 }

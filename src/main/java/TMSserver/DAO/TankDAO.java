@@ -1,10 +1,12 @@
 package TMSserver.DAO;
 
+import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.TankDTO;
 import TMSserver.SQL.Repositories.TankRepository;
 
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TankDAO {
 
- private final TankRepository tankRepository;
+    private final TankRepository tankRepository;
 
     @Async
     public String createTable() {
@@ -28,16 +30,21 @@ public class TankDAO {
         return Lists.newArrayList(tankRepository.findAll());
     }
 
-
     public Optional<TankDTO> findById(Long id) {
         return tankRepository.findById(id);
     }
 
-    public Optional<TankDTO> findByNameAndStation(Long id) {
-        return null;
+    public Optional<TankDTO> findByNameAndStation(String name, String station) {
+        return tankRepository.findByNameAndStation(name,station);
     }
 
-    public Optional<TankDTO> save(TankDTO tank) {
-        return Optional.of(tankRepository.save(tank));
+    @CacheEvict(cacheNames = "tanks", allEntries = true)
+    public void deleteById(Long id) {
+        tankRepository.deleteById(id);
+    }
+
+    @CacheEvict(cacheNames = "tanks", allEntries = true)
+    public void save(TankDTO tankDTO) {
+        tankRepository.save(tankDTO);
     }
 }

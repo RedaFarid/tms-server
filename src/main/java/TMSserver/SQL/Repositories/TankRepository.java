@@ -1,8 +1,11 @@
 package TMSserver.SQL.Repositories;
 
 import TMSserver.SQL.Entities.TankDTO;
+import TMSserver.SQL.Entities.TruckTrailerDTO;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import java.util.Optional;
 
 public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long> {
 
@@ -22,10 +25,15 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
             	[materialID] [varchar](50),
             	[onTerminal] [varchar](50),
                 [creationDate] datetime default getDate(),
+                [createdBy] varchar(100) ,
                 [modificationDate] datetime default getDate(),
-                unique ([name],[station]));
+                unique ([name],[station]),
+                FOREIGN KEY (materialID) REFERENCES Materials(id) );
             end
             select @return;
             """)
     String createTable();
+
+    @Query("select top 1 *  from Tanks where name like :name and station like :station ")
+    Optional<TankDTO> findByNameAndStation(String name , String station );
 }

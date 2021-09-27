@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table("Clients")
 public class ClientDTO {
-
     @Id
     private long id;
     private String name;
