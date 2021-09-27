@@ -25,7 +25,7 @@ public class ClientDTO {
     private long id;
     private String name;
     private String mainOfficeAddress;
-    private String contactName;
+    private String contatName;
     private String contactTelNumber;
     private String contactEmail;
     @CreatedDate
@@ -36,19 +36,5 @@ public class ClientDTO {
     private String createdBy;
     private String onTerminal;
 
-    @Override
-    public String toString() {
-        return "ClientDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", mainOfficeAddress='" + mainOfficeAddress + '\'' +
-                ", contactName='" + contactName + '\'' +
-                ", contactTelNumber='" + contactTelNumber + '\'' +
-                ", contactEmail='" + contactEmail + '\'' +
-                ", creationDate=" + creationDate +
-                ", modifyDate=" + modifyDate +
-                ", createdBy='" + createdBy + '\'' +
-                ", onTerminal='" + onTerminal + '\'' +
-                '}';
-    }
+
 }

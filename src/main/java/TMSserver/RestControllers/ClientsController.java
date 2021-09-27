@@ -19,14 +19,25 @@ public class ClientsController {
 
     @GetMapping("/clients")
     public Clients getClients(){
-        return new Clients(Lists.newArrayList(clientsService.findAll()));
-
+        Clients clients;
+        try {
+            clients = new Clients(clientsService.findAll(), null);
+        } catch (Exception e) {
+            clients = new Clients(null, e);
+        }
+        return clients;
     }
 
     @PostMapping("/saveClient")
     public String  save(@RequestBody ClientDTO client){
-        clientsService.save(client);
-        return "saved";
+        String msg = "saved";
+        try {
+            clientsService.save(client);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
     @GetMapping("/clientById/{id}")
@@ -41,8 +52,14 @@ public class ClientsController {
 
     @PostMapping("/deleteClientById")
     public String deleteClientById(@RequestBody Long id){
-        clientsService.deleteById(id);
-        return "deleted";
+        String msg = "deleted";
+        try {
+            clientsService.deleteById(id);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
     }
 
     @Data
@@ -50,5 +67,6 @@ public class ClientsController {
     @NoArgsConstructor
     public static class Clients{
         private List<ClientDTO> client;
+        private Exception exception;
     }
 }
