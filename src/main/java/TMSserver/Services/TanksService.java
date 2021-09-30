@@ -36,12 +36,10 @@ public class TanksService {
         tankDAO.save(tankDTO);
     }
 
-
+//
 //    public List<TankDTO> findAll() {
 //        return tankDAO.findAll().stream().peek(this::calculateQty).collect(Collectors.toList());
 //    }
-//
-//
 //
 //    private TankDTO calculateQty(TankDTO tankDTO) {
 //        return tankDTO;

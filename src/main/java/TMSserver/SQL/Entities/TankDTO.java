@@ -19,13 +19,13 @@ public class TankDTO {
     @Id
     private Long id;
     private String name;
-    //TODO needs relation
+    //TODO-- needs relation
     private String station;
     private double capacity = 0.0;
     private double qty = 0.0;
     private LocalDateTime dateOfQtySet;
     private String userOfQtySet;
-    private String materialID;
+    private Long materialID;
     @CreatedDate
     private LocalDateTime creationDate;
     @LastModifiedDate

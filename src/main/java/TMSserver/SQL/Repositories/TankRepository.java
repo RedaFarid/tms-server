@@ -22,7 +22,7 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
             	[qty] [float] NULL,
             	[dateOfQtySet] datetime  default getDate(),
             	[userOfQtySet] [varchar](50),
-            	[materialID] [varchar](50),
+            	[materialID] int,
             	[onTerminal] [varchar](50),
                 [creationDate] datetime default getDate(),
                 [createdBy] varchar(100) ,
