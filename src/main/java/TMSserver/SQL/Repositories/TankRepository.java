@@ -22,13 +22,13 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
             	[qty] [float] NULL,
             	[dateOfQtySet] datetime  default getDate(),
             	[userOfQtySet] [varchar](50),
-            	[materialID] int,
+            	[materialID] int ,
             	[onTerminal] [varchar](50),
                 [creationDate] datetime default getDate(),
                 [createdBy] varchar(100) ,
                 [modificationDate] datetime default getDate(),
                 unique ([name],[station]),
-                FOREIGN KEY (materialID) REFERENCES Materials(id),
+                FOREIGN KEY (materialID) REFERENCES Materials(id) ON DELETE SET null,
                 FOREIGN KEY (station) REFERENCES Stations(id));
             end
             select @return;

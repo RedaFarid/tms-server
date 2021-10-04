@@ -37,13 +37,12 @@ public class MaterialDAO {
         return materialRepository.findByName(name);
     }
 
-    //    @CacheEvict(cacheNames = "materials", cacheManager = "cacheManagerMaterial", allEntries = true)
-    @CacheEvict(cacheNames= "materials", allEntries = true)
+    @CacheEvict(value = { "materials", "tanks" } , allEntries = true)
     public void deleteById(Long id) {
         materialRepository.deleteById(id);
     }
 
-    @CacheEvict(cacheNames= "materials", allEntries = true)
+    @CacheEvict(value = { "materials", "tanks" } , allEntries = true)
     public void save(MaterialDTO materialDTO) {
         materialRepository.save(materialDTO);
     }

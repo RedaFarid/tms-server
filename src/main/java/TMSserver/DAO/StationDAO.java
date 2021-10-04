@@ -37,12 +37,12 @@ public class StationDAO {
         return stationRepository.findByStationName(stationName);
     }
 
-    @CacheEvict(cacheNames= "stations", allEntries = true)
+    @CacheEvict(value= {"stations" , "tanks"}, allEntries = true)
     public void deleteById(Long id) {
         stationRepository.deleteById(id);
     }
 
-    @CacheEvict(cacheNames= "stations", allEntries = true)
+    @CacheEvict(value= {"stations" , "tanks"}, allEntries = true)
     public void save(StationDTO stationDTO) {
        stationRepository.save(stationDTO);
     }
