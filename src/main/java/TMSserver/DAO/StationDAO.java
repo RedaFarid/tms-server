@@ -23,7 +23,7 @@ public class StationDAO {
         return stationRepository.createTable();
     }
 
-    @Cacheable("drivers")
+    @Cacheable("stations")
     public List<StationDTO> findAll() {
         return Lists.newArrayList(stationRepository.findAll());
     }

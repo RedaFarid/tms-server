@@ -15,7 +15,7 @@ public interface StationRepository extends PagingAndSortingRepository<StationDTO
             CREATE TABLE Stations(
                 [id] int identity(1,1) primary key,
                 [stationName] [varchar](250) NOT NULL UNIQUE,
-            	[location] [varchar](250) NOT NULL,
+            	[location] [varchar](250) ,
             	[computerName] [varchar](250),
             	[comment] [varchar](50),
             	[creationDate] datetime default GETDATE(),
