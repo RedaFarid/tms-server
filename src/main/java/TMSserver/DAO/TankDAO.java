@@ -34,7 +34,7 @@ public class TankDAO {
         return tankRepository.findById(id);
     }
 
-    public Optional<TankDTO> findByNameAndStation(String name, String station) {
+    public Optional<TankDTO> findByNameAndStation(String name, Long station) {
         return tankRepository.findByNameAndStation(name,station);
     }
 

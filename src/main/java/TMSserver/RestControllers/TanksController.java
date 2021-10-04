@@ -45,8 +45,8 @@ public class TanksController {
     }
 
     @GetMapping("/tankByNameAndStation/{name}/{station}")
-    public Optional<TankDTO> getTankByName(@PathVariable String name, @PathVariable String station) {
-        return tanksService.findByName(name, station);
+    public Optional<TankDTO> getTankByName(@PathVariable String name, @PathVariable Long station) {
+        return tanksService.findByNameAndStation(name, station);
     }
 
     @PostMapping("/deleteTankById")

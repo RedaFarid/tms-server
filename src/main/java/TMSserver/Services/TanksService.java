@@ -24,7 +24,7 @@ public class TanksService {
         return tankDAO.findById(id);
     }
 
-    public Optional<TankDTO> findByName(String name, String station) {
+    public Optional<TankDTO> findByNameAndStation(String name, Long station) {
         return tankDAO.findByNameAndStation(name, station);
     }
 

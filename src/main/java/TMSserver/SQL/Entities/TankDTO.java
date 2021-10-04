@@ -20,7 +20,7 @@ public class TankDTO {
     private Long id;
     private String name;
     //TODO-- needs relation
-    private String station;
+    private Long station;
     private double capacity = 0.0;
     private double qty = 0.0;
     private LocalDateTime dateOfQtySet;

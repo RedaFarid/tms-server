@@ -17,7 +17,7 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
             CREATE TABLE Tanks(
                 [id] int identity(1,1) primary key,
             	[name] [varchar](50) NOT NULL,
-            	[station] [varchar](250) NOT NULL,
+            	[station] int NOT NULL,
             	[capacity] [float] NULL,
             	[qty] [float] NULL,
             	[dateOfQtySet] datetime  default getDate(),
@@ -28,12 +28,13 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
                 [createdBy] varchar(100) ,
                 [modificationDate] datetime default getDate(),
                 unique ([name],[station]),
-                FOREIGN KEY (materialID) REFERENCES Materials(id) );
+                FOREIGN KEY (materialID) REFERENCES Materials(id),
+                FOREIGN KEY (station) REFERENCES Stations(id));
             end
             select @return;
             """)
     String createTable();
 
-    @Query("select top 1 *  from Tanks where name like :name and station like :station ")
-    Optional<TankDTO> findByNameAndStation(String name , String station );
+    @Query("select top 1 *  from Tanks where name like :name and station = :station ")
+    Optional<TankDTO> findByNameAndStation(String name , Long station );
 }
