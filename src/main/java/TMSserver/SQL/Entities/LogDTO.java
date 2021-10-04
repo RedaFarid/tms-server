@@ -27,69 +27,11 @@ public class LogDTO implements Comparable<LogDTO>, Cloneable, Serializable {
     private String event;
     @CreatedBy
     private String userName;
-    @CreatedBy
-    private String groupName;
     @CreatedDate
     private LocalDateTime dateTime;
 
     private Boolean ack = false;
-
-
-    public LogDTO(LogIdentifier logIdentifier, String source, String event, LocalTime time, LocalDate date) {
-        this.logIdentifier = logIdentifier;
-        this.source = source;
-        this.event = event;
-        this.dateTime = LocalDateTime.of(date, time);
-
-    }
-
-    public LogDTO(String source, String event, String userName, String group, LocalTime time, LocalDate date) {
-        this.source = source;
-        this.event = event;
-        this.userName = userName;
-        groupName = group;
-        this.dateTime = LocalDateTime.of(date, time);
-    }
-
-    public LogDTO(LogIdentifier logIdentifier, String source, String event) {
-        this.logIdentifier = logIdentifier;
-        this.source = source;
-        this.event = event;
-    }
-
-    public LogDTO(Long logId, LogIdentifier logIdentifier, String event) {
-        this.logId = logId;
-        this.logIdentifier = logIdentifier;
-        this.event = event;
-    }
-
-    public LogDTO(LogIdentifier logIdentifier, String event) {
-        this.logIdentifier = logIdentifier;
-        this.event = event;
-    }
-
-    public LogDTO(Long logId, LogIdentifier logIdentifier, String source, String event, String userName, LocalDateTime dateTime, Boolean ack) {
-        this.logId = logId;
-        this.logIdentifier = logIdentifier;
-        this.source = source;
-        this.event = event;
-        this.userName = userName;
-        this.dateTime = dateTime;
-        this.ack = ack;
-    }
-
-    @Override
-    public String toString() {
-        return "LogDTO{" +
-                "logId=" + logId +
-                ", logIdentifier=" + logIdentifier +
-                ", source='" + source + '\'' +
-                ", event='" + event + '\'' +
-                ", userName='" + userName + '\'' +
-                ", groupName='" + groupName + '\'' +
-                ", dateTime=" + dateTime +
-                '}';
-    }
+    private String onTerminal;
 
     @Override
     public int compareTo(LogDTO o) {
