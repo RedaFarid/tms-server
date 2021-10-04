@@ -49,7 +49,7 @@ public class DriversController {
     }
 
     @PostMapping("/deleteDriverById")
-    public String deleteClientById(@RequestBody Long id){
+    public String deleteDriverById(@RequestBody Long id){
         String msg = "deleted";
         try {
             driversService.deleteById(id);

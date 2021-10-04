@@ -30,6 +30,8 @@ public class Database {
     private TruckTrailersDAO truckTrailersDAO;
     @Autowired
     private TruckContainersDAO truckContainersDAO;
+    @Autowired
+    private StationDAO stationDAO;
 
     @PostConstruct
     public void createTables() {
@@ -40,8 +42,7 @@ public class Database {
         clientsDAO.createTable();
         truckTrailersDAO.createTable();
         truckContainersDAO.createTable();
-
-
+        stationDAO.createTable();
     }
 
 
