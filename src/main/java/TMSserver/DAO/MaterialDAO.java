@@ -42,7 +42,7 @@ public class MaterialDAO {
         materialRepository.deleteById(id);
     }
 
-    @CacheEvict(value = { "materials", "tanks" } , allEntries = true)
+    @CacheEvict(value = { "materials" } , allEntries = true)
     public void save(MaterialDTO materialDTO) {
         materialRepository.save(materialDTO);
     }
