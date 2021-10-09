@@ -30,7 +30,6 @@ public class DriverDAO {
         return Lists.newArrayList(driverRepository.findAll());
     }
 
-
     public Optional<DriverDTO> findById(Long id) {
         return driverRepository.findById(id);
     }
