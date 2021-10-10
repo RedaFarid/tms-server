@@ -28,7 +28,6 @@ public class StationDAO {
         return Lists.newArrayList(stationRepository.findAll());
     }
 
-
     public Optional<StationDTO> findById(Long id) {
         return stationRepository.findById(id);
     }

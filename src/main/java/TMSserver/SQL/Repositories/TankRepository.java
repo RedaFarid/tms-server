@@ -5,6 +5,9 @@ import TMSserver.SQL.Entities.TruckTrailerDTO;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import javax.sound.sampled.Line;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long> {
@@ -36,5 +39,8 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
     String createTable();
 
     @Query("select top 1 *  from Tanks where name like :name and station = :station ")
-    Optional<TankDTO> findByNameAndStation(String name , Long station );
+    Optional<TankDTO> findByNameAndStation(String name, Long station);
+
+    @Query("select  *  from Tanks where materialID = :materialId and station = :stationId ")
+    List<TankDTO> findByMaterialAndStation(Long materialId, Long stationId);
 }

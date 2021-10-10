@@ -47,4 +47,8 @@ public class TankDAO {
     public void save(TankDTO tankDTO) {
         tankRepository.save(tankDTO);
     }
+
+    public List<TankDTO> findByMaterialAndStation(Long materialId, Long stationId) {
+        return tankRepository.findByMaterialAndStation(materialId,stationId);
+    }
 }

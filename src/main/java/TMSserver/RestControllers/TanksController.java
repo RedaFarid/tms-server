@@ -60,6 +60,19 @@ public class TanksController {
         return msg;
     }
 
+    @GetMapping("/tanksByMaterialAndStation/{materialId}/{stationId}")
+    public Tanks getTanksByMaterialAndStation(@PathVariable Long materialId, @PathVariable Long stationId) {
+        Tanks tanks;
+        try {
+            tanks = new Tanks(tanksService.findByMaterialAndStation(materialId,stationId), null);
+        } catch (Exception e) {
+            tanks = new Tanks(null, e);
+        }
+        return tanks;
+    }
+
+
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

@@ -23,6 +23,8 @@ public class TransactionDTO {
     private long id;
     private long tank;
     private long driver;
+    private long material;
+    private long station;
     private long truckTrailer;
     private long truckContainer;
     private OperationType operationType;

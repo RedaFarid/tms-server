@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,10 @@ public class TransactionDAO {
 
     public Optional<TransactionDTO> findById(Long id) {
         return transactionRepository.findById(id);
+    }
+
+    public Optional<List<TransactionDTO>> findByTankIdAndDate(long tankId, LocalDateTime dateOfQtySet) {
+        return transactionRepository.findByTankAndDate(tankId,dateOfQtySet);
     }
 
     @CacheEvict(cacheNames = "transactions", allEntries = true)

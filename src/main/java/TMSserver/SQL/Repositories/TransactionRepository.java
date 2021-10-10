@@ -4,6 +4,10 @@ import TMSserver.SQL.Entities.TransactionDTO;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 public interface TransactionRepository extends PagingAndSortingRepository<TransactionDTO, Long> {
     @Query("""
             declare @return varchar(50);
@@ -12,9 +16,11 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
             begin
             CREATE TABLE Transactions(
                 [id] int identity(1,1) primary key,
+                [material] int NOT NULL,
+               	[station] int NOT NULL,
                	[tank] int NOT NULL,
                	[driver] int NOT NULL,
-               	[truckTrailer] int ,
+               	[truckTrailer] int NOT NULL ,
                	[truckContainer] int NOT NULL,
                	[operationType] [nvarchar](5) NOT NULL,
             	[qty] [float] Not NULL,
@@ -23,12 +29,17 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
                 [modifyDate] datetime  default GETDATE(), 
                 [createdBy] varchar(100) ,
                 [onTerminal] varchar(100),
+                FOREIGN KEY (material) REFERENCES Materials(id),
+            	FOREIGN KEY (station) REFERENCES Stations(id),
                 FOREIGN KEY (tank) REFERENCES Tanks(id),
             	FOREIGN KEY (driver) REFERENCES Drivers(id),
-            	FOREIGN KEY (truckTrailer) REFERENCES TruckTrailers(id) ON DELETE SET null,
+            	FOREIGN KEY (truckTrailer) REFERENCES TruckTrailers(id) ,
             	FOREIGN KEY (truckContainer) REFERENCES TruckContainers(id),);
             end
             select @return;
             """)
     String createTable();
+
+    @Query("select * from Transactions where tank = :tankId and dateTime >= :dateOfQtySet")
+    Optional<List<TransactionDTO>> findByTankAndDate(long tankId, LocalDateTime dateOfQtySet);
 }
