@@ -12,7 +12,6 @@ public class TmsServerApplication {
 
     public static void main(String[] args) /*throws IOException */{
         SpringApplication.run(TmsServerApplication.class, args);
-
 //        InetAddress localhost = InetAddress.getLocalHost();
 //        //  IPv4
 //        byte[] ip = localhost.getAddress();

@@ -13,7 +13,7 @@ public class CachingConfigurations /*extends CachingConfigurerSupport*/ {
     @Bean
 //    @Primary
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("tanks","materials","drivers","clients","truckTrailers","truckContainers","stations","transactions");
+        return new ConcurrentMapCacheManager("tanks","materials","drivers","clients","truckTrailers","truckContainers","stations","transactions","computers");
     }
 
 //    @Bean
