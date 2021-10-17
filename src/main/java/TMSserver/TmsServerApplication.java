@@ -1,30 +1,38 @@
 package TMSserver;
 
+import TMSserver.SQL.Entities.Authorization.AppUserDTO;
+import TMSserver.SQL.Entities.Authorization.RoleDTO;
+import TMSserver.Services.Authorization.RolesService;
+import TMSserver.Services.Authorization.UsersService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class TmsServerApplication {
-
-    public static void main(String[] args) /*throws IOException */{
+    public static void main(String[] args) {
         SpringApplication.run(TmsServerApplication.class, args);
-//        InetAddress localhost = InetAddress.getLocalHost();
-//        //  IPv4
-//        byte[] ip = localhost.getAddress();
+
+    }
+
+    @Bean
+    CommandLineRunner run (RolesService rolesService,UsersService usersService){
+       return args -> {
+//           rolesService.save(new RoleDTO("Admin"));
+//           rolesService.save(new RoleDTO("User"));
 //
-//        for (int i = 1; i <= 254; i++) {
-//            ip[3] = (byte) i;
+//           usersService.save(new AppUserDTO("john","1234"));
+//           usersService.save(new AppUserDTO("User-2","5678"));
+
 //
-//			InetAddress host = InetAddress.getByAddress(ip);
-//
-//            if (host.isReachable(1000)) {
-//                System.out.println(host + "            " + "Device Name: " + host.getHostName());
-//
-//            }
-//        }
+       };
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

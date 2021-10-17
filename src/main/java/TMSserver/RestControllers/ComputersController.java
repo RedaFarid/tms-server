@@ -1,8 +1,6 @@
 package TMSserver.RestControllers;
 
-import TMSserver.SQL.Entities.ClientDTO;
 import TMSserver.SQL.Entities.ComputerDTO;
-import TMSserver.Services.ClientsService;
 import TMSserver.Services.ComputersService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
