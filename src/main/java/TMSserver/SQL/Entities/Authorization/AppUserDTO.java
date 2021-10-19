@@ -5,11 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @ToString
@@ -23,8 +19,8 @@ public class AppUserDTO {
     private String name;
     private String password;
 
-    @MappedCollection(idColumn = "userId")
-    private Set<RoleRef> roles = new HashSet<>();
+//    @MappedCollection(idColumn = "userId")
+//    private Set<RoleRef> roles = new HashSet<>();
 
     public AppUserDTO(String name, String password) {
         this.name = name;

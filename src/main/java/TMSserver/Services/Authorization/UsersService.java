@@ -1,8 +1,10 @@
 package TMSserver.Services.Authorization;
 
+import TMSserver.DAO.Authorization.RoleRefDAO;
 import TMSserver.DAO.Authorization.RolesDAO;
 import TMSserver.DAO.Authorization.UsersDAO;
 import TMSserver.SQL.Entities.Authorization.AppUserDTO;
+import TMSserver.SQL.Entities.Authorization.RoleRef;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +27,7 @@ public class UsersService implements UserDetailsService {
 
     private final UsersDAO usersDAO;
     private final RolesDAO rolesDAO;
+    private final RoleRefDAO roleRefDAO;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -32,22 +35,25 @@ public class UsersService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        System.err.println("HEEEEEEEEEEEY");
-        AtomicReference<AppUserDTO> appUser = null;
+        AppUserDTO appUser = new AppUserDTO();
 
         usersDAO.findByName(userName).ifPresentOrElse(user -> {
-           appUser.set(user);
+            appUser.setUserId(user.getUserId());
+            appUser.setPassword(user.getPassword());
+            appUser.setName(user.getName());
 
-        } ,()->{
+        }, () -> {
             throw new UsernameNotFoundException("USer not found in database");
         });
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        appUser.get().getRoles().forEach(roleRef -> {
-            //TODO--add if present or else
-            String role = rolesDAO.findById(roleRef.getRoleId()).get().getName();
-            authorities.add(new SimpleGrantedAuthority(role));
-        });
-        return new User(appUser.get().getName(),appUser.get().getPassword(),authorities);
+
+        roleRefDAO.findByUserId(appUser.getUserId())
+                .forEach(roleId -> {
+                    //TODO--add if present or else
+                    String role = rolesDAO.findById(roleId).get().getName();
+                    authorities.add(new SimpleGrantedAuthority(role));
+                });
+        return new User(appUser.getName(), appUser.getPassword(), authorities);
     }
 
 

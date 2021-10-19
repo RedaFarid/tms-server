@@ -16,7 +16,7 @@ public interface UsersRepository extends PagingAndSortingRepository<UserDTO, Lon
             CREATE TABLE UsersData(
                 [userId] int identity(1,1) primary key,
                	[name] [varchar](250) NOT NULL  UNIQUE,
-               	[password] [nvarchar](250));
+               	[password] [nvarchar](max) NOT NULL);
             end
             select @return;
             """)
