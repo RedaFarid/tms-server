@@ -1,10 +1,8 @@
 package TMSserver.SQL.DatabaseManagement;
 
 import TMSserver.DAO.*;
-import TMSserver.DAO.Authorization.NewUsersDAO;
 import TMSserver.DAO.Authorization.RolesDAO;
 import TMSserver.DAO.Authorization.UsersDAO;
-import TMSserver.SQL.Repositories.Authorization.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -45,8 +43,7 @@ public class Database {
     private UsersDAO usersDAO;
     @Autowired
     private RolesDAO rolesDAO;
-@Autowired
-private NewUsersDAO newUsersDAO;
+
     @PostConstruct
     public void createTables() {
         // create tables
@@ -63,7 +60,6 @@ private NewUsersDAO newUsersDAO;
         usersDAO.createTable();
         rolesDAO.createTable();
         rolesDAO.createRoleRefTable();
-newUsersDAO.createTable();
         computersDAO.deleteAll();
     }
 

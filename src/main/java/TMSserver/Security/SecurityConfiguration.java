@@ -29,7 +29,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-
     }
 
     @Override
@@ -39,9 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         //This one not authorized
-        http.authorizeRequests().antMatchers("/login/**").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/clients/**").hasAnyAuthority("User");
-        http.authorizeRequests().antMatchers(POST,"/saveClient/**").hasAnyAuthority("Admin");
+        http.authorizeRequests().antMatchers("/login/**","/saveLog","/saveComputer","/computers").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/clients/**","/saveClient","clientByName/**").hasAnyAuthority("User");
+        http.authorizeRequests().antMatchers(POST,"/saveClient/**","/deleteClientById/**").hasAnyAuthority("User");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

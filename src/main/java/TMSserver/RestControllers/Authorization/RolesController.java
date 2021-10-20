@@ -1,9 +1,7 @@
 package TMSserver.RestControllers.Authorization;
 
-import TMSserver.SQL.Entities.Authorization.AppUserDTO;
 import TMSserver.SQL.Entities.Authorization.RoleDTO;
 import TMSserver.Services.Authorization.RolesService;
-import TMSserver.Services.Authorization.UsersService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
