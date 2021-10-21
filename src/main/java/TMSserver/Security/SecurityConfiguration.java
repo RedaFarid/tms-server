@@ -38,9 +38,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         //This one not authorized
-        http.authorizeRequests().antMatchers("/login/**","/saveLog","/saveComputer","/computers","/saveRole","/roleById/","/roles","/roleByName/","/users","/userById/**","/userByName/**").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/clients/**","/saveClient","clientByName/**").hasAnyAuthority("User");
-        http.authorizeRequests().antMatchers(POST,"/saveClient/**","/deleteClientById/**").hasAnyAuthority("User");
+        http.authorizeRequests().antMatchers("/login/**","/saveLog","/saveComputer","/computers","/saveRole","/roleById/","/roles","/roleByName/","/users","/userById/**","/userByName/**","/roleRefs").permitAll();
+        //Clients
+        http.authorizeRequests().antMatchers(POST,"/saveClient/**").hasAnyAuthority("Save Clients");
+        http.authorizeRequests().antMatchers(GET,"/clients/**").hasAnyAuthority("View Clients");
+        http.authorizeRequests().antMatchers(POST,"/deleteClientById/**").hasAnyAuthority("Delete Clients");
+        http.authorizeRequests().antMatchers(GET,"/clientById/**","/clientByName/**").hasAnyAuthority("View Clients","Save Clients","Delete Clients");
+
+        //Drivers
+        http.authorizeRequests().antMatchers(POST,"/saveDriver/**").hasAnyAuthority("Save Drivers");
+        http.authorizeRequests().antMatchers(GET,"/drivers/**").hasAnyAuthority("View Drivers");
+        http.authorizeRequests().antMatchers(POST,"/deleteDriverById/**").hasAnyAuthority("Delete Drivers");
+        http.authorizeRequests().antMatchers(GET,"/driverById/**","/driverByLicenceId/**").hasAnyAuthority("View Drivers","Save Drivers","Delete Drivers");
+
+//        http.authorizeRequests().antMatchers(GET,"/clients/**","/saveClient","clientByName/**","/tanks").hasAnyAuthority("Save Clients");
+//        http.authorizeRequests().antMatchers(POST,"/saveClient/**","/deleteClientById/**").hasAnyAuthority("User");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -19,18 +19,6 @@ public class DriversController {
 
     private final DriversService driversService;
 
-    @GetMapping("/")
-    public Drivers getDrivers1(){
-        Drivers drivers;
-        try {
-            drivers = new Drivers(Lists.newArrayList(driversService.findAll()), null);
-        } catch (Exception e) {
-            drivers = new Drivers(null, e);
-        }
-        return drivers;
-
-    }
-
     @GetMapping("/drivers")
     public Drivers getDrivers(){
         Drivers drivers;

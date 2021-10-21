@@ -13,4 +13,5 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("RoleRef")
 public class RoleRef {
     private long roleId;
+    private long userId;
 }

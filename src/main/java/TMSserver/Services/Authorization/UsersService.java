@@ -49,7 +49,6 @@ public class UsersService implements UserDetailsService {
 
         roleRefDAO.findByUserId(appUser.getUserId())
                 .forEach(roleId -> {
-                    //TODO--add if present or else
                     String role = rolesDAO.findById(roleId).get().getName();
                     authorities.add(new SimpleGrantedAuthority(role));
                 });

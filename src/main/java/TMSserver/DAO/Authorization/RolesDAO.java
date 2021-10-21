@@ -5,6 +5,8 @@ import TMSserver.SQL.Entities.Authorization.RoleDTO;
 import TMSserver.SQL.Repositories.Authorization.RoleRepository;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class RolesDAO {
         return roleRepository.createRoleRefTable();
     }
 
-//    @Cacheable("users")
+    @Cacheable("roles")
     public List<RoleDTO> findAll() {
         return Lists.newArrayList(roleRepository.findAll());
     }
@@ -40,12 +42,12 @@ public class RolesDAO {
         return roleRepository.findByName(name);
     }
 
-//    @CacheEvict(cacheNames = "users", allEntries = true)
+    @CacheEvict(value = { "roles", "roleRef" } , allEntries = true)
     public void deleteById(Long id) {
         roleRepository.deleteById(id);
     }
 
-//    @CacheEvict(cacheNames = "users", allEntries = true)
+    @CacheEvict(value = { "roles", "roleRef" } , allEntries = true)
     public void save(RoleDTO roleDTO) {
         roleRepository.save(roleDTO);
     }

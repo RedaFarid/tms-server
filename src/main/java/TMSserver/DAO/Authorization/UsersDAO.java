@@ -5,6 +5,8 @@ import TMSserver.SQL.Entities.Authorization.AppUserDTO;
 import TMSserver.SQL.Repositories.Authorization.UserRepository;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class UsersDAO {
         return userRepository.createTable();
     }
 
-//    @Cacheable("users")
+    @Cacheable("users")
     public List<AppUserDTO> findAll() {
         return Lists.newArrayList(userRepository.findAll());
     }
@@ -36,12 +38,12 @@ public class UsersDAO {
         return userRepository.findByName(name);
     }
 
-//    @CacheEvict(cacheNames = "users", allEntries = true)
+    @CacheEvict(value = { "users", "roleRef" } , allEntries = true)
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
-//    @CacheEvict(cacheNames = "users", allEntries = true)
+    @CacheEvict(value = { "users", "roleRef" } , allEntries = true)
     public void save(AppUserDTO AppUserDTO) {
         userRepository.save(AppUserDTO);
     }
