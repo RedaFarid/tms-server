@@ -51,6 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST,"/deleteDriverById/**").hasAnyAuthority("Delete Drivers");
         http.authorizeRequests().antMatchers(GET,"/driverById/**","/driverByLicenceId/**").hasAnyAuthority("View Drivers","Save Drivers","Delete Drivers");
 
+        //Logs
+        http.authorizeRequests().antMatchers(GET,"/logs/**").hasAnyAuthority("View Logs");
+
 //        http.authorizeRequests().antMatchers(GET,"/clients/**","/saveClient","clientByName/**","/tanks").hasAnyAuthority("Save Clients");
 //        http.authorizeRequests().antMatchers(POST,"/saveClient/**","/deleteClientById/**").hasAnyAuthority("User");
         http.authorizeRequests().anyRequest().authenticated();
