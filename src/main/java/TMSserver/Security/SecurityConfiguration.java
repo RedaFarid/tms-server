@@ -54,8 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         //Logs
         http.authorizeRequests().antMatchers(GET,"/logs/**").hasAnyAuthority("View Logs");
 
-//        http.authorizeRequests().antMatchers(GET,"/clients/**","/saveClient","clientByName/**","/tanks").hasAnyAuthority("Save Clients");
-//        http.authorizeRequests().antMatchers(POST,"/saveClient/**","/deleteClientById/**").hasAnyAuthority("User");
+        //Materials
+        http.authorizeRequests().antMatchers(POST,"/saveMaterial/**").hasAnyAuthority("Save Materials");
+        http.authorizeRequests().antMatchers(GET,"/material/**").hasAnyAuthority("View Materials");
+        http.authorizeRequests().antMatchers(POST,"/deleteMaterialByID/**").hasAnyAuthority("Delete Materials");
+        http.authorizeRequests().antMatchers(GET,"/materialByID/**","/materialByName/**").hasAnyAuthority("View Materials","Save Materials","Delete Materials");
+
+
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
