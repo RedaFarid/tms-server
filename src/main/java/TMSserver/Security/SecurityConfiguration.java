@@ -60,6 +60,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST,"/deleteMaterialByID/**").hasAnyAuthority("Delete Materials");
         http.authorizeRequests().antMatchers(GET,"/materialByID/**","/materialByName/**").hasAnyAuthority("View Materials","Save Materials","Delete Materials");
 
+        //Stations
+        http.authorizeRequests().antMatchers(POST,"/saveStations/**").hasAnyAuthority("Save Stations");
+        http.authorizeRequests().antMatchers(GET,"/stations/**").hasAnyAuthority("View Stations");
+        http.authorizeRequests().antMatchers(POST,"/deleteStationsById/**").hasAnyAuthority("Delete Stations");
+        http.authorizeRequests().antMatchers(GET,"/stationsById/**","/stationByName/**").hasAnyAuthority("View Stations","Save Stations","Delete Stations");
+
 
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
