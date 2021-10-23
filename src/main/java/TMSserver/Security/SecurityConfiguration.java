@@ -72,6 +72,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST,"/deleteTankById/**").hasAnyAuthority("Delete Tanks");
         http.authorizeRequests().antMatchers(GET,"/tankById/**","/tankByNameAndStation/**","/tanksByMaterialAndStation/**").hasAnyAuthority("View Tanks","Save Tanks","Delete Tanks");
 
+        //Transactions
+        http.authorizeRequests().antMatchers(POST,"/saveTransaction/**").hasAnyAuthority("Save Transactions");
+        http.authorizeRequests().antMatchers(GET,"/transactions/**").hasAnyAuthority("View Transactions");
+        http.authorizeRequests().antMatchers(POST,"/deleteTransactionById/**").hasAnyAuthority("Delete Transactions");
+        http.authorizeRequests().antMatchers(GET,"/transactionById/**").hasAnyAuthority("View Transactions","Save Transactions","Delete Transactions");
+
+        //Truck Trailers
+        http.authorizeRequests().antMatchers(POST,"/saveTruckTrailers/**").hasAnyAuthority("Save Truck Trailers");
+        http.authorizeRequests().antMatchers(GET,"/truckTrailers/**").hasAnyAuthority("View Truck Trailers");
+        http.authorizeRequests().antMatchers(POST,"/deleteTruckTrailerById/**").hasAnyAuthority("Delete Truck Trailers");
+        http.authorizeRequests().antMatchers(GET,"/truckTrailerById/**","/truckTrailersByLicenceNo/**","/truckTrailersByTrailerNo/**").hasAnyAuthority("View Truck Trailers","Save Truck Trailers","Delete Truck Trailers");
+
+        //Truck Containers
+        http.authorizeRequests().antMatchers(POST,"/saveTruckContainers/**").hasAnyAuthority("Save Truck Containers");
+        http.authorizeRequests().antMatchers(GET,"/truckContainers/**").hasAnyAuthority("View Truck Containers");
+        http.authorizeRequests().antMatchers(POST,"/deleteTruckContainersById/**").hasAnyAuthority("Delete Truck Containers");
+        http.authorizeRequests().antMatchers(GET,"/truckContainersById/**","/truckContainersByLicenceNo/**","/truckContainersByContainerNo/**").hasAnyAuthority("View Truck Containers","Save Truck Containers","Delete Truck Containers");
+
 
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
