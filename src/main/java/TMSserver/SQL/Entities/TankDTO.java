@@ -32,6 +32,8 @@ public class TankDTO {
     private LocalDateTime modificationDate;
     @CreatedBy
     private String createdBy;
+    @LastModifiedBy
+    private String lastModifiedBy;
     private String onTerminal;
 
     @Transient

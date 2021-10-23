@@ -26,6 +26,7 @@ public interface TruckContainerRepository extends PagingAndSortingRepository<Tru
             	[creationDate] datetime default GETDATE(),  
                 [modifyDate] datetime  default GETDATE(), 
                 [createdBy] varchar(100) ,
+                [lastModifiedBy] varchar(100) ,
                 [onTerminal] varchar(100));
             end
             select @return;

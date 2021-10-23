@@ -29,6 +29,7 @@ public interface TankRepository extends PagingAndSortingRepository<TankDTO, Long
             	[onTerminal] [varchar](50),
                 [creationDate] datetime default getDate(),
                 [createdBy] varchar(100) ,
+                [lastModifiedBy] varchar(100) ,
                 [modificationDate] datetime default getDate(),
                 unique ([name],[station]),
                 FOREIGN KEY (materialID) REFERENCES Materials(id) ON DELETE SET null,

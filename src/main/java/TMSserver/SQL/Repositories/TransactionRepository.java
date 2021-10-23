@@ -29,6 +29,7 @@ public interface TransactionRepository extends PagingAndSortingRepository<Transa
             [creationDate] datetime default GETDATE(),  
             [modifyDate] datetime  default GETDATE(), 
             [createdBy] varchar(100) ,
+            [lastModifiedBy] varchar(100) ,
             [onTerminal] varchar(100),
             FOREIGN KEY (material) REFERENCES Materials(id),
             FOREIGN KEY (station) REFERENCES Stations(id),

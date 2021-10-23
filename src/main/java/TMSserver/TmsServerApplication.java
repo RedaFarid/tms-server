@@ -1,10 +1,5 @@
 package TMSserver;
 
-import TMSserver.SQL.Entities.Authorization.AppUserDTO;
-import TMSserver.SQL.Entities.Authorization.RoleDTO;
-import TMSserver.Services.Authorization.RolesService;
-import TMSserver.Services.Authorization.UsersService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
