@@ -21,11 +21,11 @@ public class TmsServerApplication {
 //    @Bean
 //    CommandLineRunner run (RolesService rolesService,UsersService usersService){
 //       return args -> {
-//           rolesService.save(new RoleDTO("Admin"));
-//           rolesService.save(new RoleDTO("User"));
+////           rolesService.save(new RoleDTO("Admin"));
+////           rolesService.save(new RoleDTO("User"));
 //
-//           usersService.save(new AppUserDTO("john","1234"));
-//           usersService.save(new AppUserDTO("User-2","5678"));
+//           usersService.save(new AppUserDTO("ChiefAdmin","1234"));
+////           usersService.save(new AppUserDTO("User-2","5678"));
 //
 ////
 //       };

@@ -4,9 +4,7 @@ import TMSserver.DAO.Authorization.RoleRefDAO;
 import TMSserver.DAO.Authorization.RolesDAO;
 import TMSserver.DAO.Authorization.UsersDAO;
 import TMSserver.SQL.Entities.Authorization.AppUserDTO;
-import TMSserver.SQL.Entities.Authorization.RoleRef;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +29,6 @@ public class UsersService implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
 
-    //TODO--modify
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
@@ -49,8 +46,13 @@ public class UsersService implements UserDetailsService {
 
         roleRefDAO.findByUserId(appUser.getUserId())
                 .forEach(roleId -> {
-                    String role = rolesDAO.findById(roleId).get().getName();
-                    authorities.add(new SimpleGrantedAuthority(role));
+                    AtomicReference<String> role = new AtomicReference<>("");
+                    rolesDAO.findById(roleId).ifPresentOrElse(item -> {
+                        role.set(item.getName());
+                    }, () -> {
+                        role.set("Unassigned authority");
+                    });
+                    authorities.add(new SimpleGrantedAuthority(role.get()));
                 });
         return new User(appUser.getName(), appUser.getPassword(), authorities);
     }

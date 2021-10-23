@@ -1,6 +1,7 @@
 package TMSserver;
 
 
+import TMSserver.Security.Filter.CustomAuthenticationFilter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@ import javax.sql.DataSource;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Log4j2
@@ -67,7 +69,9 @@ public class SQLConfigurations extends AbstractJdbcConfiguration {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return new UserAuditor();
-    }
+        return () -> {
+            return Optional.of(CustomAuthenticationFilter.getUsername());
+        };
 
+    }
 }
