@@ -80,15 +80,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         //Truck Trailers
         http.authorizeRequests().antMatchers(POST,"/saveTruckTrailers/**").hasAnyAuthority("Save Truck Trailers");
-        http.authorizeRequests().antMatchers(GET,"/truckTrailers/**").hasAnyAuthority("View Truck Trailers");
+        http.authorizeRequests().antMatchers(GET,"/truckTrailers/**").hasAnyAuthority("View Trucks");
         http.authorizeRequests().antMatchers(POST,"/deleteTruckTrailerById/**").hasAnyAuthority("Delete Truck Trailers");
-        http.authorizeRequests().antMatchers(GET,"/truckTrailerById/**","/truckTrailersByLicenceNo/**","/truckTrailersByTrailerNo/**").hasAnyAuthority("View Truck Trailers","Save Truck Trailers","Delete Truck Trailers");
+        http.authorizeRequests().antMatchers(GET,"/truckTrailerById/**","/truckTrailersByLicenceNo/**","/truckTrailersByTrailerNo/**").hasAnyAuthority("View Trucks","Save Truck Trailers","Delete Truck Trailers");
 
         //Truck Containers
         http.authorizeRequests().antMatchers(POST,"/saveTruckContainers/**").hasAnyAuthority("Save Truck Containers");
-        http.authorizeRequests().antMatchers(GET,"/truckContainers/**").hasAnyAuthority("View Truck Containers");
+        http.authorizeRequests().antMatchers(GET,"/truckContainers/**").hasAnyAuthority("View Trucks");
         http.authorizeRequests().antMatchers(POST,"/deleteTruckContainersById/**").hasAnyAuthority("Delete Truck Containers");
-        http.authorizeRequests().antMatchers(GET,"/truckContainersById/**","/truckContainersByLicenceNo/**","/truckContainersByContainerNo/**").hasAnyAuthority("View Truck Containers","Save Truck Containers","Delete Truck Containers");
+        http.authorizeRequests().antMatchers(GET,"/truckContainersById/**","/truckContainersByLicenceNo/**","/truckContainersByContainerNo/**").hasAnyAuthority("View Trucks","Save Truck Containers","Delete Truck Containers");
 
 
         http.authorizeRequests().anyRequest().authenticated();
