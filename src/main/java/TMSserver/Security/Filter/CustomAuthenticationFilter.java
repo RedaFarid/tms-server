@@ -47,11 +47,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
 
         setUsername(user.getUsername());
-        //TODO -- save secret in some secure place and encrypt it  and pass it here and decrypt it from utility class
+
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         String accessToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 24 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
@@ -76,7 +76,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         errors.put("Error", failed.getMessage());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
-
     }
 
     public static String getUsername() {

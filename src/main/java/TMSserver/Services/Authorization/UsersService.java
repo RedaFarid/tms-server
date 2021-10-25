@@ -79,4 +79,8 @@ public class UsersService implements UserDetailsService {
         usersDAO.save(appUserDTO);
     }
 
+    public void updateUsername(String name , long id) {
+        usersDAO.updateUsername(name,id);
+    }
+
 }

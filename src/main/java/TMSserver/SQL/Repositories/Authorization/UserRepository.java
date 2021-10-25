@@ -1,6 +1,7 @@
 package TMSserver.SQL.Repositories.Authorization;
 
 import TMSserver.SQL.Entities.Authorization.AppUserDTO;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -24,4 +25,7 @@ public interface UserRepository extends PagingAndSortingRepository<AppUserDTO, L
     @Query("select top 1 * from [Users] where [name] like :name ")
     Optional<AppUserDTO> findByName(String name);
 
+    @Modifying
+    @Query("update [Users] SET [name] = :name  where [userId] = :id")
+    void  updateUsername(String name , Long id);
 }

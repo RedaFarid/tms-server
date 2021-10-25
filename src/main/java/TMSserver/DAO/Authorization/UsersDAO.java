@@ -48,4 +48,9 @@ public class UsersDAO {
         userRepository.save(AppUserDTO);
     }
 
+    @CacheEvict(value = { "users" } , allEntries = true)
+    public void updateUsername(String name , Long id) {
+        userRepository.updateUsername(name,id);
+    }
+
 }

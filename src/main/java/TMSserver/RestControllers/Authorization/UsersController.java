@@ -31,10 +31,22 @@ public class UsersController {
     }
 
     @PostMapping("/saveUser")
-    public String  save(@RequestBody AppUserDTO user){
+    public String save(@RequestBody AppUserDTO user){
         String msg = "saved";
         try {
             usersService.save(user);
+        }
+        catch (Exception e){
+            msg = e.getMessage();
+        }
+        return msg;
+    }
+
+    @PostMapping("/updateUsername")
+    public String updateUsername(@RequestBody AppUserDTO user){
+        String msg = "saved";
+        try {
+            usersService.updateUsername(user.getName(),user.getUserId());
         }
         catch (Exception e){
             msg = e.getMessage();
@@ -48,7 +60,7 @@ public class UsersController {
     }
 
     @GetMapping("/userByName/{name}")
-    public Optional<AppUserDTO> getUByName(@PathVariable String name){
+    public Optional<AppUserDTO> getUserByName(@PathVariable String name){
         return usersService.findByName(name);
     }
 
