@@ -30,14 +30,14 @@ public class RoleRefDAO {
         return Lists.newArrayList(roleRefRepository.findAll());
     }
 
-    @CacheEvict(value = { "roleRef" } , allEntries = true)
+    @CacheEvict(cacheNames = "roleRef" , allEntries = true)
     public void save(RoleRef roleRef) {
-        roleRefRepository.save(roleRef);
+        roleRefRepository.save(roleRef.getUserId(),roleRef.getRoleId());
     }
 
     @CacheEvict(value = { "roles", "roleRef" } , allEntries = true)
     public void deleteByRoleRef(RoleRef roleRef) {
-        roleRefRepository.delete(roleRef);
+        roleRefRepository.delete(roleRef.getUserId(),roleRef.getRoleId());
     }
 
 }

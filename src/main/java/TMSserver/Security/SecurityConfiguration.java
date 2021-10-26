@@ -90,7 +90,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST,"/deleteTruckContainersById/**").hasAnyAuthority("Delete Truck Containers");
         http.authorizeRequests().antMatchers(GET,"/truckContainersById/**","/truckContainersByLicenceNo/**","/truckContainersByContainerNo/**").hasAnyAuthority("View Trucks","Save Truck Containers","Delete Truck Containers");
 
-        http.authorizeRequests().antMatchers(POST,"/deleteUserById/**","/saveUser/**","/updateUsername/**").hasAnyAuthority("User Administration");
+        http.authorizeRequests().antMatchers(POST,"/deleteUserById/**","/saveUser/**","/updateUsername/**","/deleteByRoleRef/**","/saveRoleRef/**").hasAnyAuthority("User Administration");
 
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);

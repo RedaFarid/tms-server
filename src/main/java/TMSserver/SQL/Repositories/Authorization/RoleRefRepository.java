@@ -1,6 +1,7 @@
 package TMSserver.SQL.Repositories.Authorization;
 
 import TMSserver.SQL.Entities.Authorization.RoleRef;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -24,5 +25,11 @@ public interface RoleRefRepository extends PagingAndSortingRepository<RoleRef, L
     @Query("select roleId from RoleRef where userId = :user")
     List<Long> findByUserId(Long user);
 
+    @Modifying
+    @Query("insert into [RoleRef] (userId,roleId) values (:userId , :roleId)")
+    void save(Long userId , Long roleId);
 
+    @Modifying
+    @Query("delete from [RoleRef] where userId = :userId and roleId = :roleId")
+    void delete(Long userId , Long roleId);
 }

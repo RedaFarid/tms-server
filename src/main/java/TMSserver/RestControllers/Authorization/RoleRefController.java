@@ -34,7 +34,7 @@ public class RoleRefController {
     public String  save(@RequestBody RoleRef roleRef){
         String msg = "saved";
         try {
-            roleRefService.save(roleRef);
+            roleRefService.save(roleRef);;
         }
         catch (Exception e){
             msg = e.getMessage();
